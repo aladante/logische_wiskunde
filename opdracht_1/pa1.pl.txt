@@ -1,0 +1,21 @@
+vehicle(airplane)  :- is_true('has wings'), air_vehicle() .
+vehicle(spaceCraft)  :- is_true('has wings'), is_true('has no wheels'), air_vehicle().
+vehicle(car)  :- is_true('has four wheels'), is_true('has enginge'), land_vehicle() .
+vehicle(bike) :- is_true('has two wheels'), land_vehicle().
+vehicle(cycle) :- is_true('has two wheels'), is_true('no engine'), land_vehicle().
+vehicle(boat) :- is_true('has two wheels'), is_true('no engine'), boat_vehicle().
+
+land_vehicle() :-
+	is_true('drives on land'), 
+
+air_vehicle() :-
+	is_true('fly in air'), 
+	is_true('has engine').
+
+boat_vechicle() :-
+	is_true("moves over water"),
+    is_true("has no wheels")
+
+is_true(Q) :-
+        format("~w?\n", [Q]),
+        read(yes).
