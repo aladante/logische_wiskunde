@@ -6,3 +6,42 @@ The application can be run by typing vehicle(X).
 The expert programe will then ask a series of questions and then identifies the vehicle based on the user input.
 
 
+The rules are defined below.
+We make a lot of use of the modus ponens.
+
+If the vehicle fly's it is a air vehicle.
+If the vehicle drives and has 4 wheels is s a car.
+
+Based on those fact's and question we can make certain assertions.
+
+This follows the rule of modus ponens.
+
+A
+A -> B
+________
+:. B 
+
+This concept is seen in our programe as if it has wings and fly's in the air it is an aircraft.
+
+
+vehicle(airplane)  :- is_true('has wings'), air_vehicle() .
+vehicle(spaceCraft)  :- is_true('has wings'), is_true('has no wheels'), air_vehicle().
+vehicle(car)  :- is_true('has four wheels'), is_true('has enginge'), land_vehicle() .
+vehicle(bike) :- is_true('has two wheels'), land_vehicle().
+vehicle(cycle) :- is_true('has two wheels'), is_true('no engine'), land_vehicle().
+vehicle(boat) :- is_true('has two wheels'), is_true('no engine'), boat_vehicle().
+
+land_vehicle() :-
+	is_true('drives on land'), 
+
+air_vehicle() :-
+	is_true('fly in air'), 
+	is_true('has engine').
+
+boat_vechicle() :-
+	is_true("moves over water"),
+    is_true("has no wheels")
+
+is_true(Q) :-
+        format("~w?\n", [Q]),
+        read(yes).
