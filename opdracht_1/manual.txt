@@ -1,0 +1,8 @@
+We created an expert system that indentify the type of vehicle based on questions.
+
+We tested the application in the web version.
+
+The application can be run by typing vehicle(X).
+The expert programe will then ask a series of questions and then identifies the vehicle based on the user input.
+
+
