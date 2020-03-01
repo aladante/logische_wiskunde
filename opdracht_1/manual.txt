@@ -21,8 +21,10 @@ A -> B
 ________
 :. B 
 
-This concept is seen in our programe as if it has wings and fly's in the air it is an aircraft.
+The modus ponens concept is reflected in the application with terain type vehicles.
 
+If the vehicle drives on land it is an land vehicle.
+    
 
 vehicle(airplane)  :- is_true('has wings'), air_vehicle() .
 vehicle(spaceCraft)  :- is_true('has wings'), is_true('has no wheels'), air_vehicle().
