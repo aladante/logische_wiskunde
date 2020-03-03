@@ -28,9 +28,9 @@ The code is included with comments to provide as reference for the explanation.
 
 
 \begin{lstlisting}{}
-%test
-vehicle(airplane)  :- is_true('has wings'), air_vehicle() .
-vehicle(spaceCraft)  :- is_true('has wings'), is_true('has no wheels'), air_vehicle().
+isVehicle(X) :- is_true('mode of transportation'), vehicle(X).
+vehicle(airplane)  :- is_true('has wings'), air_vehicle().
+vehicle(spaceCraft)  :- air_vehicle(), hasWheels().
 vehicle(car)  :- is_true('has four wheels'), is_true('has enginge'), land_vehicle() .
 vehicle(bike) :- is_true('has two wheels'), land_vehicle().
 vehicle(cycle) :- is_true('has two wheels'), is_true('no engine'), land_vehicle().
@@ -46,6 +46,8 @@ air_vehicle() :-
 boat_vehicle() :-
 	is_true("moves over water"),
     is_true("has no wheels").
+
+hasWheels() :- not(is_true('has wheels')).
 
 is_true(Q) :-
         format("~w?\n", [Q]),
