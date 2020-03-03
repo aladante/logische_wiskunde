@@ -1,0 +1,56 @@
+\section{Introduction} \label{man-introduction}
+This section will go in detail about the working, idea and logic of our expert system.
+
+\section{application} \label{man-application}
+We choose to create an application that will indentify the vehicle type based on user input.
+
+By answering specific provided questions the expert system is able to identify the type of vehicle.
+The vehicle type could be a land vehicle such as a car or bicycle or something like a boat.
+
+By answering yes or no the system is able to assume the type of vehicle.
+
+
+\section{Usage} \label{man-usage}
+The application is run by providing the following command \textbf{isVehicle(X)}.
+This will first check if where looking to identify a vehicle.
+
+If the user types yes the system agrees on a abstract datatype vehicle.
+This datatype has multiple sub types such as land vehicle or air vehicle. At last we have the unidentified
+vehicle this can be a car or boat.
+The answer will be decided by the answers that the user provides.
+
+\newpage
+\section{Logic} \label{man-logic}
+In this section we will provide an explanation of our code.
+The code is included with comments to provide as reference for the explanation.
+
+
+
+
+\begin{lstlisting}{}
+%test
+vehicle(airplane)  :- is_true('has wings'), air_vehicle() .
+vehicle(spaceCraft)  :- is_true('has wings'), is_true('has no wheels'), air_vehicle().
+vehicle(car)  :- is_true('has four wheels'), is_true('has enginge'), land_vehicle() .
+vehicle(bike) :- is_true('has two wheels'), land_vehicle().
+vehicle(cycle) :- is_true('has two wheels'), is_true('no engine'), land_vehicle().
+vehicle(boat) :- is_true('has two wheels'), is_true('no engine'), boat_vehicle().
+
+land_vehicle() :-
+	is_true('drives on land').
+
+air_vehicle() :-
+	is_true('fly in air'), 
+	is_true('has engine').
+
+boat_vehicle() :-
+	is_true("moves over water"),
+    is_true("has no wheels").
+
+is_true(Q) :-
+        format("~w?\n", [Q]),
+        read(yes).
+\end{lstlisting}
+
+
+
