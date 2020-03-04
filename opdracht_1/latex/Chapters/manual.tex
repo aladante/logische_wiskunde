@@ -25,10 +25,11 @@ In this section we will provide an explanation of our code.
 The code is included with comments to provide as reference for the explanation.
 
 
-
-
 \begin{lstlisting}{}
+% this will be the entry to our expert system
 isVehicle(X) :- is_true('mode of transportation'), vehicle(X).
+
+% the types of vehicle each type is part of an subtype
 vehicle(airplane)  :- is_true('has wings'), air_vehicle().
 vehicle(spaceCraft)  :- air_vehicle(), hasWheels().
 vehicle(car)  :- is_true('has four wheels'), is_true('has enginge'), land_vehicle() .
@@ -36,9 +37,10 @@ vehicle(bike) :- is_true('has two wheels'), land_vehicle().
 vehicle(cycle) :- is_true('has two wheels'), is_true('no engine'), land_vehicle().
 vehicle(boat) :- is_true('has two wheels'), is_true('no engine'), boat_vehicle().
 
+% the subtypes 
 land_vehicle() :-
 	is_true('drives on land').
-
+% check sub types
 air_vehicle() :-
 	is_true('fly in air'), 
 	is_true('has engine').
@@ -49,6 +51,7 @@ boat_vehicle() :-
 
 hasWheels() :- not(is_true('has wheels')).
 
+% helper method to generate questions
 is_true(Q) :-
         format("~w?\n", [Q]),
         read(yes).
