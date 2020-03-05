@@ -1,7 +1,7 @@
 \section{Introduction} \label{man-introduction}
 This section will go in detail about the workings, idea's and logic of our expert system.
 
-\section{application} \label{man-application}
+\section{Application} \label{man-application}
 We have chosen to create an application that identifies the vehicle type based on user input.
 
 By answering specific questions that the expert system asks,
@@ -13,6 +13,15 @@ of subtypes. Subtypes of land vehicles are cars and bicycles in our system.
 By answering `yes' or `no' to certain questions,
 the system is able to make an educated
 guess about the type of the vehicle.
+
+\subsection{Flowchart} \label{man-diagram-application}
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{images/flowchart-prolog-vehicle-expert-system.png}
+  \caption{This figure displays a decision tree that shows how our system could
+  come to a conclusion in determining the type of a vehicle.}
+  \label{fig:flowchart-expert-system}
+\end{figure}
+
 
 \section{Usage} \label{man-usage}
 The application is run by providing the following command \textbf{isVehicle(X)}.
@@ -59,6 +68,9 @@ is_true(Q) :-
         format("~w?\n", [Q]),
         read(yes).
 \end{lstlisting}
+
+\newpage
+\section{Queries} \label{man-queries}
 
 \begin{figure}[!h]
     \centering
