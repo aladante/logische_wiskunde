@@ -1,23 +1,27 @@
 \section{Introduction} \label{man-introduction}
-This section will go in detail about the working, idea and logic of our expert system.
+This section will go in detail about the workings, idea's and logic of our expert system.
 
 \section{application} \label{man-application}
-We choose to create an application that will indentify the vehicle type based on user input.
+We have chosen to create an application that identifies the vehicle type based on user input.
 
-By answering specific provided questions the expert system is able to identify the type of vehicle.
-The vehicle type could be a land vehicle such as a car or bicycle or something like a boat.
+By answering specific questions that the expert system asks,
+the system is able to deduce and identify the type of a vehicle.
+An example of a vehicle type defined in our system is `land vehicle'.
+A land vehicle, like other vehicle types in our system, also consists
+of subtypes. Subtypes of land vehicles are cars and bicycles in our system.
 
-By answering yes or no the system is able to assume the type of vehicle.
-
+By answering `yes' or `no' to certain questions,
+the system is able to make an educated
+guess about the type of the vehicle.
 
 \section{Usage} \label{man-usage}
 The application is run by providing the following command \textbf{isVehicle(X)}.
-This will first check if where looking to identify a vehicle.
+This will first check if we are looking to identify a vehicle.
 
-If the user types yes the system agrees on a abstract datatype vehicle.
-This datatype has multiple sub types such as land vehicle or air vehicle. At last we have the unidentified
-vehicle this can be a car or boat.
-The answer will be decided by the answers that the user provides.
+If the user types `yes' the system agrees on a abstract data type `vehicle'.
+This data type has multiple subtypes such as `land vehicle' or `air vehicle'.
+At last we have the `unidentified vehicle'; this can be a car or boat.
+The answer the system gives will be decided by the answers that the user provides.
 
 \newpage
 \section{Logic} \label{man-logic}
@@ -36,12 +40,12 @@ vehicle(bike) :- is_true('has two wheels'), land_vehicle().
 vehicle(cycle) :- is_true('has two wheels'), is_true('no engine'), land_vehicle().
 vehicle(boat) :- is_true('has two wheels'), is_true('no engine'), boat_vehicle().
 
-% the subtypes 
+% the subtypes
 land_vehicle() :-
 	is_true('drives on land').
 % check sub types
 air_vehicle() :-
-	is_true('fly in air'), 
+	is_true('fly in air'),
 	is_true('has engine').
 
 boat_vehicle() :-
