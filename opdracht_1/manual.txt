@@ -42,6 +42,11 @@ T F | A fround vehicle is not a bike     = true
 F T | Not a ground vehicle is a bike     = false
 F F | Not a ground vehicle is not a bike = true
 
+We also make use of the chain rule.
+A vehicle is a ground vehicle is a bike.
+vehicle is a bike.
+
+
 isVehicle(X) :- is_true('mode of transportation'), vehicle(X).
 vehicle(airplane)  :- is_true('has wings'), air_vehicle().
 vehicle(spaceCraft)  :- air_vehicle(), hasNoWheels().
