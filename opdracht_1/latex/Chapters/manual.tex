@@ -18,7 +18,9 @@ guess about the type of the vehicle.
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{images/flowchart-prolog-vehicle-expert-system.png}
   \caption{This figure displays a decision tree that shows how our system could
-  come to a conclusion in determining the type of a vehicle.}
+  come to a conclusion in determining the type of a vehicle. The starting point
+  in the diagram is the box with the text `Identify if an object is a vehicle
+  and if so, of what type'.}
   \label{fig:flowchart-expert-system}
 \end{figure}
 
@@ -34,44 +36,65 @@ The answer the system gives will be decided by the answers that the user provide
 
 \newpage
 \section{Logic} \label{man-logic}
-We make a lot of use of the modus ponens.
+We created an expert system that identifies the type of vehicle based on
+questions the user answers.
 
-If the vehicle fly's it is a air vehicle.
-If the vehicle drives and has 4 wheels is s a car.
+We tested the application in the SWISH web interface for prolog.
+
+The application can be run by typing isVehicle(X).
+The expert system will then ask a series of questions and identify the vehicle based on the user input.
+
+The rules are defined below for our expert system are defined below.
+
+We make a lot of use of the `Modus Ponens' in our expert system.
+
+If the vehicle flies; it is an `air vehicle'.
+If the vehicle drives and has 4 wheels it is a car.
 
 Based on those fact's and question we can make certain assertions.
 
-This follows the rule of modus ponens.
+This follows the rule of Modus Ponens.
 
 A
 A -> B
 \_\_\_\_\_\_\_\_
-:. B 
+:. B
 
-The modus ponens concept is reflected in the application with terain type vehicles.
+The Modus Ponens concept is reflected in the application with terrain type vehicles.
 
 If the vehicle drives on land it is an land vehicle.
 
-The way modus pones applies here will be illustrated with a literal truth table.
+The way modus pones applies here will be illustrated with a truth table.
 
-The modus pones truth table is as following.
+The modus pones truth table is as follows:
 A B | A -> B
 T T | T
 T F | T
 F T | F
 F F | T
 
-So a could a a vehicle
-and B could be a ground bike
+Let's say `A' represents `vehicle'
+and `B' represents motorbike
 A B | A -> B
 T T | A ground vehicle is a vehicle      = true
-T F | A fround vehicle is not a bike     = true 
-F T | Not a ground vehicle is a bike     = false
-F F | Not a ground vehicle is not a bike = true
+T F | A ground vehicle is not a motorbike     = true
+F T | Not a ground vehicle is a motorbike     = false
+F F | Not a ground vehicle is not a motorbike = true
 
-We also make use of the chain rule.
-A vehicle is a ground vehicle is a bike.
-vehicle is a bike.
+We also make use of transitivity in our system.
+We will illustrate this with the following example.
+A motorbike is a subtype of ground vehicle
+and a ground vehicle is a subtype of
+vehicle in our system. We know with our system's rules
+that X is a ground vehicle if X is a motorbike.
+We also know that a ground vehicle is a vehicle, thus we know
+a motorbike is also a vehicle.
+Transitivity can be written more generally like this:
+
+P -> Q
+Q -> R
+\_\_\_\_\_\_\_\_
+:. P -> R
 
 \begin{lstlisting}{}
 % this will be the entry to our expert system
@@ -104,13 +127,6 @@ is_true(Q) :-
         format("~w?\n", [Q]),
         read(yes).
 \end{lstlisting}
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[height=7cm]{images/weirdfout.png}
-  \caption{Rare foutmelding}
-  \label{fig:rareFout}
-\end{figure}{}
 
 \newpage
 \section{Queries} \label{man-queries}
