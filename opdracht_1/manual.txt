@@ -24,25 +24,44 @@ ________
 The modus ponens concept is reflected in the application with terain type vehicles.
 
 If the vehicle drives on land it is an land vehicle.
-    
 
-vehicle(airplane)  :- is_true('has wings'), air_vehicle() .
-vehicle(spaceCraft)  :- is_true('has wings'), is_true('has no wheels'), air_vehicle().
+The way modus pones applies here will be illustrated with a literal truth table.
+
+The modus pones truth table is as following.
+A B | A -> B
+T T | T
+T F | T
+F T | F
+F F | T
+
+So a could a a vehicle
+and B could be a ground bike
+A B | A -> B
+T T | A ground vehicle is a vehicle      = true
+T F | A fround vehicle is not a bike     = true 
+F T | Not a ground vehicle is a bike     = false
+F F | Not a ground vehicle is not a bike = true
+
+isVehicle(X) :- is_true('mode of transportation'), vehicle(X).
+vehicle(airplane)  :- is_true('has wings'), air_vehicle().
+vehicle(spaceCraft)  :- air_vehicle(), hasNoWheels().
 vehicle(car)  :- is_true('has four wheels'), is_true('has enginge'), land_vehicle() .
 vehicle(bike) :- is_true('has two wheels'), land_vehicle().
 vehicle(cycle) :- is_true('has two wheels'), is_true('no engine'), land_vehicle().
 vehicle(boat) :- is_true('has two wheels'), is_true('no engine'), boat_vehicle().
 
 land_vehicle() :-
-	is_true('drives on land'), 
+	is_true('drives on land').
 
 air_vehicle() :-
 	is_true('fly in air'), 
 	is_true('has engine').
 
-boat_vechicle() :-
+boat_vehicle() :-
 	is_true("moves over water"),
-    is_true("has no wheels")
+    is_true("has no wheels").
+
+hasNoWheels() :- not(is_true('has wheels')).
 
 is_true(Q) :-
         format("~w?\n", [Q]),
