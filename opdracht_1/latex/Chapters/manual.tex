@@ -34,8 +34,44 @@ The answer the system gives will be decided by the answers that the user provide
 
 \newpage
 \section{Logic} \label{man-logic}
-In this section we will provide an explanation of our code.
-The code is included with comments to provide as reference for the explanation.
+We make a lot of use of the modus ponens.
+
+If the vehicle fly's it is a air vehicle.
+If the vehicle drives and has 4 wheels is s a car.
+
+Based on those fact's and question we can make certain assertions.
+
+This follows the rule of modus ponens.
+
+A
+A -> B
+\_\_\_\_\_\_\_\_
+:. B 
+
+The modus ponens concept is reflected in the application with terain type vehicles.
+
+If the vehicle drives on land it is an land vehicle.
+
+The way modus pones applies here will be illustrated with a literal truth table.
+
+The modus pones truth table is as following.
+A B | A -> B
+T T | T
+T F | T
+F T | F
+F F | T
+
+So a could a a vehicle
+and B could be a ground bike
+A B | A -> B
+T T | A ground vehicle is a vehicle      = true
+T F | A fround vehicle is not a bike     = true 
+F T | Not a ground vehicle is a bike     = false
+F F | Not a ground vehicle is not a bike = true
+
+We also make use of the chain rule.
+A vehicle is a ground vehicle is a bike.
+vehicle is a bike.
 
 \begin{lstlisting}{}
 % this will be the entry to our expert system
