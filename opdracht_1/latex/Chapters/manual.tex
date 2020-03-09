@@ -36,6 +36,7 @@ The answer the system gives will be decided by the answers that the user provide
 
 \newpage
 \section{Logic} \label{man-logic}
+\subsection{Introduction} \label{man-logic-introduction}
 We created an expert system that identifies the type of vehicle based on
 questions the user answers.
 
@@ -46,6 +47,7 @@ The expert system will then ask a series of questions and identify the vehicle b
 
 The rules are defined below for our expert system are defined below.
 
+\subsection{Modus Ponens} \label{man-logic-modus-ponens}
 We make a lot of use of the `Modus Ponens' in our expert system.
 
 If the vehicle flies; it is an `air vehicle'.
@@ -55,10 +57,11 @@ Based on those fact's and question we can make certain assertions.
 
 This follows the rule of Modus Ponens.
 
-A
-A -> B
-\_\_\_\_\_\_\_\_
-:. B
+\begin{tabular}{ l }
+  A  \\
+  A -\textgreater  B \\ \hline
+  :. B \\
+\end{tabular}
 
 The Modus Ponens concept is reflected in the application with terrain type vehicles.
 
@@ -66,21 +69,30 @@ If the vehicle drives on land it is an land vehicle.
 
 The way modus pones applies here will be illustrated with a truth table.
 
-The modus pones truth table is as follows:
-A B | A -> B
-T T | T
-T F | T
-F T | F
-F F | T
+The modus pones truth table is as follows:\\
+~\\
+\begin{tabular}{ l l | c }
+  A & B & A -\textgreater B \\ \hline
+  T & T & T \\
+  T & F & T \\
+  F & T & F \\
+  F & F & T \\
+\end{tabular}
+~\\
 
 Let's say `A' represents `vehicle'
-and `B' represents motorbike
-A B | A -> B
-T T | A ground vehicle is a vehicle      = true
-T F | A ground vehicle is not a motorbike     = true
-F T | Not a ground vehicle is a motorbike     = false
-F F | Not a ground vehicle is not a motorbike = true
+and `B' represents motorbike:\\
+~\\
+\begin{tabular}{ l l | c }
+  A & B & A -\textgreater B \\ \hline
+  T & T & A ground vehicle is a vehicle = T \\
+  T & F & A ground vehicle is not a motorbike = F \\
+  F & T & Not a ground vehicle is a motorbike = F \\
+  F & F & Not a ground vehicle is not a motorbike = T \\
+\end{tabular}
+~\\
 
+\subsection{Transitivity} \label{man-logic-transitivity}
 We also make use of transitivity in our system.
 We will illustrate this with the following example.
 A motorbike is a subtype of ground vehicle
@@ -89,18 +101,22 @@ vehicle in our system. We know with our system's rules
 that X is a ground vehicle if X is a motorbike.
 We also know that a ground vehicle is a vehicle, thus we know
 a motorbike is also a vehicle.
-Transitivity can be written more generally like this:
-
-P -> Q
-Q -> R
-\_\_\_\_\_\_\_\_
-:. P -> R
-
+Transitivity can be written more generally like this:\\
+~\\
+\begin{tabular}{ l }
+  P -\textgreater Q \\
+  Q -\textgreater R \\ \hline
+  :. P -\textgreater R \\
+\end{tabular}
+\newpage
+\subsection{Expert System Code} \label{man-logic-expert-system}
+Below the code of the expert system with comments provided explaining
+the different parts of the system.
 \begin{lstlisting}{}
-% this will be the entry to our expert system
+% this will be the entry command to our expert system
 isVehicle(X) :- is_true('mode of transportation'), vehicle(X).
 
-% the types of vehicle each type is part of an subtype
+% the types of vehicles, each type is part of an subtype
 vehicle(airplane)  :- is_true('has wings'), air_vehicle().
 vehicle(spaceCraft)  :- air_vehicle(), hasNoWheels().
 vehicle(car)  :- is_true('has four wheels'), is_true('has engine'), land_vehicle() .
@@ -108,10 +124,10 @@ vehicle(motorBike) :- is_true('has two wheels'), land_vehicle().
 vehicle(bicycle) :- is_true('no engine'), is_true('has two wheels'), land_vehicle().
 vehicle(boat) :- is_true('has two wheels'), is_true('no engine'), boat_vehicle().
 
-% the subtypes
+% the various vehicle subtypes
 land_vehicle() :-
 	is_true('drives on land').
-% check sub types
+
 air_vehicle() :-
 	is_true('flies in air'),
 	is_true('has engine').
@@ -120,6 +136,7 @@ boat_vehicle() :-
 	is_true("moves over water"),
     is_true("has no wheels").
 
+% helper function used in the spacecraft rule above
 hasNoWheels() :- not(is_true('has wheels')).
 
 % helper method to generate questions
@@ -135,18 +152,15 @@ The queries will be listed along with the responses of the system and comments
 providing extra information.
 
 \begin{lstlisting}{}
-% Our expert system always starts with
-% the question whether the object the
-% the user is trying to identify is a
-% vehicle by asking if the object is a "mode
-% of transportation". If the user answers `no',
-% the system knows the object is not a vehicle and
-% will return `false' and stop guessing.
-% If the user answers `yes', the system knows the
-% object is a vehicle and will ask further questions
-% to determine the specific type of vehicle. In the example
-% below the user answers that "Chair" is not a mode of transportation
-% so the system replies with false.
+% Our expert system always starts with the question whether the object
+% the the user is trying to identify is a vehicle by asking if the
+% object is a "mode of transportation". If the user answers `no',
+% the system knows the object is not a vehicle and will return
+% `false' and stop guessing. If the user answers `yes', the system
+% knows the object is a vehicle and will ask further questions to
+% determine the specific type of vehicle. In the example below the
+% user answers that "Chair" is not a mode of transportation so the
+% system replies with false.
 ?- isVehicle(Chair).
 mode of transportation?
 |: no.
@@ -157,11 +171,11 @@ false.
 \begin{lstlisting}{}
 % In the query below we try to identify the object "JumboJet".
 % after determining that the object is an actual vehicle, the
-% system asks if the vehicle has wings. Because the user answers `yes'
-% the system tries to match the object as an `air vehicle'. Being an
-% air vehicle in our system consists of `flying in the air' and `having an
-% engine'. Since the user answers yes to both of these questions, the system
-% correctly asserts that the object is an airplane.
+% system asks if the vehicle has wings. Because the user answers
+% `yes' the system tries to match the object as an `air vehicle'.
+% Being an air vehicle in our system consists of `flying in the air'
+% and `having an engine'. Since the user answers yes to both of these
+% questions, the system correctly asserts that the object is an airplane.
 ?- isVehicle(JumboJet).
 mode of transportation?
 |: yes.
@@ -196,13 +210,15 @@ Sputnik1 = spaceCraft .
 
 \begin{lstlisting}{}
 % In the example below we try to identify a `Ferrari`.
-% When the user says `no' to the questions about having wings and
-% flying in the air, the system rules out the possibility of
-% the object being any type of air vehicle like an airplane or spacecraft.
-% Then our system asks if the object has four wheels. When the user says `yes',
-% it tries to check if the object has an engine. If this is also true, the system
-% tries to check if the object is a land vehicle by asking if the object drives on
-% land. If this is true the object, Ferrari, is identified as a car.
+% When the user says `no' to the questions about having wings
+% and flying in the air, the system rules out the possibility
+% of the object being any type of air vehicle like an airplane
+% or spacecraft. Then our system asks if the object has four
+% wheels. When the user says `yes', it tries to check if the
+% object has an engine. If this is also true, the system tries
+% to check if the object is a land vehicle by asking if the object
+% drives on land. If this is true the object, Ferrari, is
+% identified as a car.
 ?- isVehicle(Ferrari).
 mode of transportation?
 |: yes.
