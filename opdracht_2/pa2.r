@@ -42,7 +42,7 @@ bicycles <- vehicles %>% filter(drives_on_land == TRUE, wheels == 2, engine == F
 print_query(bicycles, "\nShowing all bicycles in a table\n")
 
 motor_bikes <- vehicles %>% filter(drives_on_land == TRUE, wheels == 2, engine == TRUE)
-print_query(motor_bikes, "\nShowing all bicycles in a table\n")
+print_query(motor_bikes, "\nShowing all motor bikes in a table\n")
 
 cars <- vehicles %>% filter(drives_on_land == TRUE, wheels == 4, engine == FALSE)
 print_query(cars, "\nShowing all cars in a table\n")

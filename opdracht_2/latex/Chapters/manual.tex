@@ -1,0 +1,87 @@
+\section{Introduction} \label{man-introduction}
+This section will go in detail about the workings, idea's and logic of our
+database and queries.
+
+\section{Application} \label{man-application}
+The database is based the expert system we have built in the previous
+assignment. This system identifies the vehicle type based on user input.
+
+By answering specific questions that the expert system asks,
+the system is able to deduce and identify the type of a vehicle.
+An example of a vehicle type defined in our system is `land vehicle'.
+A land vehicle, like other vehicle types in our system, also consists
+of subtypes. Subtypes of land vehicles are cars and bicycles in our expert system.
+
+By answering `yes' or `no' to certain questions,
+the expert system is able to make an educated
+guess about the type of the vehicle.
+
+This database and accompanying queries tries to translate this functionality
+into a database. Some vehicle data is inserted into tables. Vehicle subtypes
+each have their on table in our database (air vehicle, land vehicle,
+water vehicle). These three tables are merged into a bigger and more general
+`vehicles' table. This `vehicles' table is queried simulating the our vehicle
+types expert system.
+
+\subsection{Flowchart} \label{man-diagram-application}
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{images/VehicleTypesRTables.png}
+  \caption{This figure shows a visual representation of our vehicle types database schema}
+\end{figure}
+
+\section{Usage} \label{man-usage}
+The application is run by providing the following command \textbf{Rscript pa2.r}
+(Remove the `.txt' extension from the file if you haven't done so already).
+
+Runnin initializes all functions, tables, queries and other data needed for the
+program. It also executes all queries at once along with a helpful message
+telling the user what the query has tried to retrieve from the database.
+
+\newpage
+\section{Queries} \label{man-queries}
+Below will be listed several queries that each test a rule in our expert system.
+The queries will be listed along with the responses of the system and comments
+providing extra information.
+
+% \begin{lstlisting}{}
+% % Showing all vehicles in a table
+% % # A tibble: 9 x 8
+     % % id name  flies\_in\_the\_air engine wings wheels drives\_on\_land
+  % % <dbl> <chr> <lgl>            <lgl>  <lgl>  <dbl> <lgl>
+% % 1     1 Airb… TRUE             TRUE   TRUE      20 FALSE
+% % 2     2 Apol… TRUE             TRUE   FALSE      0 FALSE
+% % 3     3 Lock… TRUE             TRUE   TRUE       6 FALSE
+% % 4     1 Ferr… FALSE            TRUE   FALSE      4 TRUE
+% % 5     2 Gaze… FALSE            FALSE  FALSE      2 TRUE
+% % 6     3 Yama… FALSE            TRUE   FALSE      2 TRUE
+% % 7     1 Rega… FALSE            TRUE   FALSE      0 FALSE
+% % 8     2 Lizz… FALSE            FALSE  FALSE      0 FALSE
+% % 9     3 Lazz… FALSE            TRUE   FALSE      0 FALSE
+% % # … with 1 more variable: moves\_via\_water <lgl>
+% \end{lstlisting}
+%
+% \begin{lstlisting}{}
+% % Showing all bicycles in a table
+% % # A tibble: 1 x 8
+     % % id name  flies\_in\_the\_air engine wings wheels drives\_on\_land
+  % % <dbl> <chr> <lgl>            <lgl>  <lgl>  <dbl> <lgl>
+% % 1     2 Gaze… FALSE            FALSE  FALSE      2 TRUE
+% % # … with 1 more variable: moves\_via\_water <lgl>
+% \end{lstlisting}
+%
+% \begin{lstlisting}{}
+% % Showing all motor bikes in a table
+% % # A tibble: 1 x 8
+     % % id name  flies\_in\_the\_air engine wings wheels drives\_on\_land
+  % % <dbl> <chr> <lgl>            <lgl>  <lgl>  <dbl> <lgl>
+% % 1     3 Yama… FALSE            TRUE   FALSE      2 TRUE
+% % # … with 1 more variable: moves\_via\_water <lgl>
+% \end{lstlisting}
+%
+% \begin{lstlisting}{}
+% % In the example below the system ruled out
+% \end{lstlisting}
+%
+% \begin{lstlisting}{}
+% % In the example below we see the system thinks Gazelle is of type motorbike,
+% \end{lstlisting}
