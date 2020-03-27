@@ -6,6 +6,7 @@ print_query <- function(query, message) {
   query
 }
 
+# ------------- Tables and tuples --------------
 # Define a table for each vehicle type: air_vehicle, land_vehicle &
 # water_vehicles
 air_vehicles <- tibble(
@@ -32,9 +33,10 @@ water_vehicles <- tibble(
   engine = c(TRUE, FALSE, TRUE)
 )
 
+# ------------- Queries--------------
 # Full outer join of all vehicle type tables to get a table that lists all
 # vehicles. Null/NA values are replaced with FALSE.
-vehicles = full_join(air_vehicles, land_vehicles) %>% full_join(water_vehicles) %>% replace(is.na(.),FALSE)
+vehicles <- full_join(air_vehicles, land_vehicles) %>% full_join(water_vehicles) %>% replace(is.na(.),FALSE)
 print_query(vehicles, "\nShowing all vehicles in a table\n")
 
 # Land vehicles
@@ -42,7 +44,7 @@ bicycles <- vehicles %>% filter(drives_on_land == TRUE, wheels == 2, engine == F
 print_query(bicycles, "\nShowing all bicycles in a table\n")
 
 motor_bikes <- vehicles %>% filter(drives_on_land == TRUE, wheels == 2, engine == TRUE)
-print_query(motor_bikes, "\nShowing all bicycles in a table\n")
+print_query(motor_bikes, "\nShowing all motor bikes in a table\n")
 
 cars <- vehicles %>% filter(drives_on_land == TRUE, wheels == 4, engine == FALSE)
 print_query(cars, "\nShowing all cars in a table\n")
