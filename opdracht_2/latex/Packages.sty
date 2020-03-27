@@ -1,6 +1,8 @@
-\usepackage{graphicx} 
+\usepackage{graphicx}
 \usepackage[dutch]{babel}
 \usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 
 %----- this is the bib setting
 
@@ -10,7 +12,7 @@
             urldate=short,
             style=apa]{biblatex}
 
-\addbibresource{References.bib} 
+\addbibresource{References.bib}
 
 \DeclareLanguageMapping{dutch}{dutch-apa}
 \NewBibliographyString{retrieved}
@@ -51,13 +53,13 @@
 
 % ------- title for chapters
 \usepackage{titlesec}
-\titleformat{\chapter}{\normalfont\huge\bf}{\thechapter.}{20pt}{\huge\bf}   
+\titleformat{\chapter}{\normalfont\huge\bf}{\thechapter.}{20pt}{\huge\bf}
 \titlespacing*{\chapter}{0pt}{-50pt}{0pt}
 \titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
 \titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
 \titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
-  
-% ------- this is the lsListing to show java or change to prefered 
+
+% ------- this is the lsListing to show java or change to prefered
 \usepackage{listings}
 \usepackage{color}
 
