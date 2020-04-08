@@ -59,8 +59,12 @@ public class RsaFrame extends JFrame {
 		step3 = new JButton("step3");
 
 		decrypt.addActionListener(new ButtonListener());
+		step1.addActionListener(new ButtonListener());
+		step2.addActionListener(new ButtonListener());
+		step3.addActionListener(new ButtonListener());
 		encrypt.addActionListener(new ButtonListener());
-
+		dstep1.addActionListener(new ButtonListener());
+		dstep2.addActionListener(new ButtonListener());
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.add(encrypt);
@@ -81,23 +85,28 @@ public class RsaFrame extends JFrame {
 	private class ButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			String result;
+			String result = "";
 
 			if(e.getSource() == encrypt){
 				result = tool.encrypt(input.getText().trim());
 			}
-			else if(e.getSource() == step1) {}
-			else if(e.getSource() == step1) {}
-			else if(e.getSource() == step1) {}
-			else if(e.getSource() == step1) {}
+			else if(e.getSource() == step1) {
+				result = tool.getCalculateTime();
+			}
+			else if(e.getSource() == step2) {
+				result = tool.getMod();
+			}
+			else if(e.getSource() == step3) {
+				result = tool.encrypt(input.getText().trim());
+			}
+			else if(e.getSource() == dstep1) {}
+			else if(e.getSource() == dstep2) {}
 			else{
 				result = tool.decrypt(input.getText().trim());
 			}
 
 			resultArea.setText(result);
-
 		}
-
 	}
 }
 

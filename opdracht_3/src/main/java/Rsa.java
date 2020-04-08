@@ -11,8 +11,8 @@ public class Rsa {
 
     private BigInteger publicKey;
     private BigInteger privateKey;
-
     private long calculateTime;
+    
     public Rsa(int bitLength){
         long begin = 0;
         long end =0;
@@ -36,7 +36,6 @@ public class Rsa {
 
     }
 
-
     public BigInteger encrypt(BigInteger message){
         return message.modPow(publicKey, modulus);
     }
@@ -53,14 +52,18 @@ public class Rsa {
         return this.decrypt(new BigInteger(message)).toString();
     }
 
-    public BigInteger getModulus(){
-        return this.modulus;
-    }
-
     public String getPublicKey(){
         return this.publicKey.toString() + this.modulus.toString();
     }
 
+    public String getCalculateTime() {
+        return String.valueOf(this.calculateTime);
+    }
+
+    public String getMod() {
+        return String.valueOf(this.modulus);
+    }
+    
     @Override
     public String toString(){
         return 	"Public:\t" + this.publicKey +
