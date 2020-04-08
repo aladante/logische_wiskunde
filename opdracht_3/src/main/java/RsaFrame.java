@@ -12,8 +12,8 @@ public class RsaFrame extends JFrame {
 
 	private JTextArea resultArea;
 	private JTextArea input;
-	private JButton decrypt;
-	private JButton encrypt;
+	private JButton decrypt, dstep1 ,dstep2 ;
+	private JButton encrypt, step1, step2, step3;
 
 	private Rsa tool;
 
@@ -51,7 +51,12 @@ public class RsaFrame extends JFrame {
 
 
 		decrypt = new JButton("Decrypt");
+		dstep1 = new JButton("step1");
+		dstep2 = new JButton("step2");
 		encrypt = new JButton("Encrypt");
+		step1 = new JButton("step1");
+		step2 = new JButton("step2");
+		step3 = new JButton("step3");
 
 		decrypt.addActionListener(new ButtonListener());
 		encrypt.addActionListener(new ButtonListener());
@@ -59,13 +64,16 @@ public class RsaFrame extends JFrame {
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.add(encrypt);
+		buttonPane.add(step1);
+		buttonPane.add(step2);
+		buttonPane.add(step3);
 		buttonPane.add(decrypt);
+		buttonPane.add(dstep1);
+		buttonPane.add(dstep2);
 		buttonPane.add(pubKey);
-
 		add(input);
 		add(buttonPane);
 		add(resultArea);
-
 		pack();
 	}
 
@@ -77,7 +85,12 @@ public class RsaFrame extends JFrame {
 
 			if(e.getSource() == encrypt){
 				result = tool.encrypt(input.getText().trim());
-			}else{
+			}
+			else if(e.getSource() == step1) {}
+			else if(e.getSource() == step1) {}
+			else if(e.getSource() == step1) {}
+			else if(e.getSource() == step1) {}
+			else{
 				result = tool.decrypt(input.getText().trim());
 			}
 

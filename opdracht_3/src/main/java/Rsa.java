@@ -12,9 +12,22 @@ public class Rsa {
     private BigInteger publicKey;
     private BigInteger privateKey;
 
+    private long calculateTime;
     public Rsa(int bitLength){
+        long begin = 0;
+        long end =0;
+        begin = System.nanoTime();
         BigInteger p = BigInteger.probablePrime(bitLength / 2, new Random());
         BigInteger q = BigInteger.probablePrime(bitLength / 2, new Random());
+        while(!p.isProbablePrime(100)) {
+            p = BigInteger.probablePrime(bitLength / 2, new Random());
+        }
+        while (!q.isProbablePrime(100)) {
+            q = BigInteger.probablePrime(bitLength / 2, new Random());
+        }
+        end = System.nanoTime();
+        this.calculateTime = end - begin;
+        
         BigInteger phi = (p.subtract(one)).multiply(q.subtract(one));
 
         this.modulus = p.multiply(q);
