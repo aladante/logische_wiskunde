@@ -7,16 +7,24 @@ public class Rsa {
     private final static SecureRandom random = new SecureRandom();
     private final static BigInteger one = new BigInteger("1");
 
+    private int bitLength;
+
     private BigInteger modulus;
 
     private BigInteger publicKey;
     private BigInteger privateKey;
     private long calculateTime;
     
+    
     public Rsa(int bitLength){
+        this.bitLength = bitLength;
+
+    }
+
+    public void generatePandQ(){
         long begin = 0;
         long end =0;
-        begin = System.nanoTime();
+        begin = System.currentTimeMillis();
         BigInteger p = BigInteger.probablePrime(bitLength / 2, new Random());
         BigInteger q = BigInteger.probablePrime(bitLength / 2, new Random());
         while(!p.isProbablePrime(100)) {
@@ -25,15 +33,14 @@ public class Rsa {
         while (!q.isProbablePrime(100)) {
             q = BigInteger.probablePrime(bitLength / 2, new Random());
         }
-        end = System.nanoTime();
+        end = System.currentTimeMillis();
         this.calculateTime = end - begin;
-        
+
         BigInteger phi = (p.subtract(one)).multiply(q.subtract(one));
 
         this.modulus = p.multiply(q);
         this.publicKey = new BigInteger("65537");
         this.privateKey = publicKey.modInverse(phi);
-
     }
 
     public BigInteger encrypt(BigInteger message){
@@ -45,6 +52,7 @@ public class Rsa {
     }
 
     public String encrypt(String message){
+        System.out.print(message);
         return this.encrypt(new BigInteger(message)).toString();
     }
 
@@ -57,7 +65,7 @@ public class Rsa {
     }
 
     public String getCalculateTime() {
-        return String.valueOf(this.calculateTime);
+        return String.valueOf(this.calculateTime) + "   in miliseconds";
     }
 
     public String getMod() {
