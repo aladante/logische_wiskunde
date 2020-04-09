@@ -18,7 +18,7 @@ public class RsaFrame extends JFrame {
 	private Rsa tool;
 
 	public RsaFrame() {
-		super("Johans RSA");
+		super("encypte decrypte");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setResizable(false);
@@ -26,6 +26,8 @@ public class RsaFrame extends JFrame {
 		setLayout(new GridLayout(3, 1));
 
 		String bitLength = JOptionPane.showInputDialog(this, "Please provide a bit length");
+
+		Font resultFont = new Font("Arial", Font.PLAIN, 12);
 
 		if (bitLength == null) {
 			System.exit(0);
@@ -38,14 +40,15 @@ public class RsaFrame extends JFrame {
 		}
 
 
-		JLabel pubKey = new JLabel(tool.getPublicKey().toString());
+		JLabel pKey = new JLabel(tool.getPublicKey().toString());
 
-		Font resultFont = new Font("Monaco", Font.PLAIN, 13);
 
 		resultArea = new JTextArea(8, 20);
 		input = new JTextArea(8, 20);
+
 		resultArea.setFont(resultFont);
 		input.setFont(resultFont);
+
 		resultArea.setMargin(new Insets(5, 5, 5, 5));
 		input.setMargin(new Insets(5, 5, 5, 5));
 
@@ -74,7 +77,7 @@ public class RsaFrame extends JFrame {
 		buttonPane.add(decrypt);
 		buttonPane.add(dstep1);
 		buttonPane.add(dstep2);
-		buttonPane.add(pubKey);
+		buttonPane.add(pKey);
 		add(input);
 		add(buttonPane);
 		add(resultArea);
