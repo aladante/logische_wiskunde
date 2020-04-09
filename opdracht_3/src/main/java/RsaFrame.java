@@ -3,15 +3,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Deque;
 
 
 public class RsaFrame extends JFrame {
 
-	private final int WIDTH = 400;
-	private final int HEIGHT = 300;
+	private final int WIDTH = 800;
+	private final int HEIGHT = 500;
 
-	private JTextArea resultArea;
-	private JTextArea input;
+	private JTextArea rSpace;
+	private JTextArea iSpace;
 	private JButton decrypt, dstep1 ,dstep2 ;
 	private JButton encrypt, step1, step2, step3;
 
@@ -40,17 +41,25 @@ public class RsaFrame extends JFrame {
 		}
 
 
-		JLabel pKey = new JLabel(tool.getPublicKey().toString());
+		JTextArea pKey = new JTextArea(tool.getPublicKey().toString(), 8,70);
+		pKey.setLineWrap(true);
+		pKey.setWrapStyleWord(true);
+		pKey.setEditable(false);
 
+		rSpace = new JTextArea(8, 20);
+		rSpace.setLineWrap(true);
+		rSpace.setWrapStyleWord(true);
 
-		resultArea = new JTextArea(8, 20);
-		input = new JTextArea(8, 20);
+		iSpace = new JTextArea(8, 20);
+		iSpace.setLineWrap(true);
+		iSpace.setWrapStyleWord(true);
+		
 
-		resultArea.setFont(resultFont);
-		input.setFont(resultFont);
+		rSpace.setFont(resultFont);
+		iSpace.setFont(resultFont);
 
-		resultArea.setMargin(new Insets(5, 5, 5, 5));
-		input.setMargin(new Insets(5, 5, 5, 5));
+		rSpace.setMargin(new Insets(5, 5, 5, 5));
+		iSpace.setMargin(new Insets(5, 5, 5, 5));
 
 
 		decrypt = new JButton("Decrypt");
@@ -78,9 +87,9 @@ public class RsaFrame extends JFrame {
 		buttonPane.add(dstep1);
 		buttonPane.add(dstep2);
 		buttonPane.add(pKey);
-		add(input);
+		add(iSpace);
 		add(buttonPane);
-		add(resultArea);
+		add(rSpace);
 		pack();
 	}
 
@@ -91,7 +100,7 @@ public class RsaFrame extends JFrame {
 			String result = "";
 
 			if(e.getSource() == encrypt){
-				result = tool.encrypt(input.getText().trim());
+				result = tool.encrypt(iSpace.getText().trim());
 			}
 			else if(e.getSource() == step1) {
 				result = tool.getCalculateTime();
@@ -100,15 +109,15 @@ public class RsaFrame extends JFrame {
 				result = tool.getMod();
 			}
 			else if(e.getSource() == step3) {
-				result = tool.encrypt(input.getText().trim());
+				result = tool.encrypt(iSpace.getText().trim());
 			}
 			else if(e.getSource() == dstep1) {}
 			else if(e.getSource() == dstep2) {}
-			else{
-				result = tool.decrypt(input.getText().trim());
+			else if(e.getSource() == decrypt) {
+				result = tool.decrypt(iSpace.getText().trim());
 			}
 
-			resultArea.setText(result);
+			rSpace.setText(result);
 		}
 	}
 }
