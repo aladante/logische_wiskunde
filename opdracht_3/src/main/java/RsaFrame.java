@@ -92,9 +92,10 @@ public class RsaFrame extends JFrame {
 			} else if (e.getSource() == step3) {
 				result = theCrypterr.encrypt(iSpace.getText().trim());
 			} else if (e.getSource() == dstep1) {
-				result = theCrypterr.getPrivateKey();
+				pKey.setText(theCrypterr.getPrivateKey());
 			} else if (e.getSource() == dstep2) {
-				pKey.setText(theCrypterr.decrypt(iSpace.getText().trim()));
+				
+				result = theCrypterr.decrypt(iSpace.getText().trim());
 			}
 			rSpace.setText(result);
 		}
