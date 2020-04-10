@@ -89,14 +89,13 @@ public class RsaFrame extends JFrame {
 			String result = "";
 
 			if (e.getSource() == step2) {
-				result = theCrypterr.getMod();
+				pKey.setText(theCrypterr.getPublicKey().toString() + "  is public key");
 			} else if (e.getSource() == step3) {
-				pKey.setText(theCrypterr.getPublicKey().toString());
 				result = theCrypterr.encrypt(iSpace.getText().trim());
 			} else if (e.getSource() == dstep1) {
 				result = theCrypterr.decrypt(iSpace.getText().trim());
 			} else if (e.getSource() == dstep2) {
-
+				result = theCrypterr.decrypt(iSpace.getText().trim());
 			}
 			rSpace.setText(result);
 		}
