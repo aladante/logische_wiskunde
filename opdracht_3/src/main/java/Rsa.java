@@ -71,6 +71,10 @@ public class Rsa {
     public String getMod() {
         return String.valueOf(this.modulus);
     }
+
+    public String getPrivateKey(){
+        return String.valueOf(this.privateKey) + "   This is private Key";
+    }
     
     @Override
     public String toString(){
