@@ -3,17 +3,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static javax.swing.JOptionPane.*;
 
 public class RsaFrame extends JFrame {
 
 	private final int WIDTH = 800;
 	private final int HEIGHT = 500;
 
-	private JTextArea rSpace;
-	private JTextArea iSpace;
-	private JButton dstep1, dstep2;
-	private JButton step1, step2, step3;
-	private JTextArea pKey;
+	private final JTextArea rSpace;
+	private final JTextArea iSpace;
+	private final JButton dstep1, dstep2;
+	private final JButton step2, step3;
+	private final JTextArea pKey;
 
 	private Rsa theCrypterr;
 
@@ -25,8 +26,8 @@ public class RsaFrame extends JFrame {
 
 		setLayout(new GridLayout(3, 1));
 
-		String lengthInBits = JOptionPane.showInputDialog(this, "Step 1 provide n");
-		Font resultFont = new Font("Arial", Font.PLAIN, 12);
+		final String lengthInBits = JOptionPane.showInputDialog(this, "Step 1 provide n");
+		final Font resultFont = new Font("Arial", Font.PLAIN, 12);
 
 		if (lengthInBits == null) {
 			System.exit(0);
@@ -34,11 +35,10 @@ public class RsaFrame extends JFrame {
 			try {
 				theCrypterr = new Rsa(Integer.parseInt(lengthInBits));
 
-			} catch (NumberFormatException e) {
-				JOptionPane.showMessageDialog(this, "Please provide a legal integer!");
+			} catch (final NumberFormatException e) {
+				JOptionPane.showMessageDialog(this, "provide a positive integer");
 			}
 		}
-
 
 		pKey = new JTextArea(8, 70);
 		pKey.setLineWrap(true);
@@ -69,7 +69,7 @@ public class RsaFrame extends JFrame {
 		dstep1.addActionListener(new ButtonListener());
 		dstep2.addActionListener(new ButtonListener());
 
-		JPanel buttonPane = new JPanel();
+		final JPanel buttonPane = new JPanel();
 		buttonPane.add(step2);
 		buttonPane.add(step3);
 		buttonPane.add(dstep1);
@@ -85,11 +85,15 @@ public class RsaFrame extends JFrame {
 
 	private class ButtonListener implements ActionListener {
 
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(final ActionEvent e) {
 			String result = "";
 			if (e.getSource() == step2) {
 				pKey.setText(theCrypterr.getPublicKey().toString() + "  is public key");
 			} else if (e.getSource() == step3) {
+				if (iSpace.getText() != null && iSpace.getText().isEmpty()) {
+					iSpace.setText("Please input a integer as key");
+					return;
+				}
 				result = theCrypterr.encrypt(iSpace.getText().trim());
 			} else if (e.getSource() == dstep1) {
 				pKey.setText(theCrypterr.getPrivateKey());
