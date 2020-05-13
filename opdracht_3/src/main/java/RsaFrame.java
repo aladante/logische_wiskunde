@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import static javax.swing.JOptionPane.*;
 
 public class RsaFrame extends JFrame {
 
@@ -27,7 +26,7 @@ public class RsaFrame extends JFrame {
 		setLayout(new GridLayout(3, 1));
 
 		final String lengthInBits = JOptionPane.showInputDialog(this, "Step 1 provide n");
-		final Font resultFont = new Font("Arial", Font.PLAIN, 12);
+		final Font resultFont = new Font("Arial", Font.PLAIN, 11);
 
 		if (lengthInBits == null) {
 			System.exit(0);
@@ -91,14 +90,13 @@ public class RsaFrame extends JFrame {
 				pKey.setText(theCrypterr.getPublicKey().toString() + "  is public key");
 			} else if (e.getSource() == step3) {
 				if (iSpace.getText() != null && iSpace.getText().isEmpty()) {
-					iSpace.setText("Please input a integer as key");
+					iSpace.setText("Please input a integer message");
 					return;
 				}
 				result = theCrypterr.encrypt(iSpace.getText().trim());
 			} else if (e.getSource() == dstep1) {
 				pKey.setText(theCrypterr.getPrivateKey());
 			} else if (e.getSource() == dstep2) {
-				
 				result = theCrypterr.decrypt(iSpace.getText().trim());
 			}
 			rSpace.setText(result);
