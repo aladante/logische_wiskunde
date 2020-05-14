@@ -1,3 +1,5 @@
+package nl.hva;
+
 import javax.swing.*;
 
 import java.awt.*;

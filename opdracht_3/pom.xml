@@ -25,7 +25,7 @@
             <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>nl.hva.main</mainClass>
+                <mainClass>nl.hva.Main</mainClass>
             </manifest>
             </archive>
         </configuration>
