@@ -1,0 +1,86 @@
+\usepackage{graphicx} 
+\usepackage[dutch]{babel}
+\usepackage{float}
+
+%----- this is the bib setting
+
+\usepackage{csquotes, url}
+\usepackage[backend=biber,
+            citestyle=verbose-ibid,
+            urldate=short,
+            style=apa]{biblatex}
+
+\addbibresource{References.bib} 
+
+\DeclareLanguageMapping{dutch}{dutch-apa}
+\NewBibliographyString{retrieved}
+\NewBibliographyString{from}
+\DefineBibliographyStrings{dutch}{%
+   nodate = {z.d.},
+   retrieved = {geraadpleegd op},
+   from = {},
+}
+
+\DeclareFieldFormat{apacase}{#1}
+
+\DeclareBibliographyCategory{websites}
+\DeclareBibliographyCategory{spoken}
+\DeclareBibliographyCategory{books}
+
+\AtEveryCitekey{%
+  \ifentrytype{misc}{%
+    \iffieldundef{howpublished}{%
+      \addtocategory{websites}{\thefield{entrykey}}%
+    }{%
+      \addtocategory{spoken}{\thefield{entrykey}}%
+    }%
+  }{%
+  }%
+}
+
+\AtEveryCitekey{%
+  \ifentrytype{book}{%
+      \addtocategory{books}{\thefield{entrykey}}%
+  }{}%
+}
+\let\footcite\footfullcite
+
+% ------- this is the indent settings
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 2pt minus 1pt}
+
+% ------- title for chapters
+\usepackage{titlesec}
+\titleformat{\chapter}{\normalfont\huge\bf}{\thechapter.}{20pt}{\huge\bf}   
+\titlespacing*{\chapter}{0pt}{-50pt}{0pt}
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+  
+% ------- this is the lsListing to show java or change to prefered 
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+    language=Prolog,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=none,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3
+}
+
+%------ for pdf
+\usepackage{hyperref}

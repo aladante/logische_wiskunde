@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: nl.hva.Main
+Class-Path: lib/lib1.jar lib/lib2.jar
