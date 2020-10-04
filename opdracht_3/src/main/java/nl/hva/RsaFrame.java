@@ -1,107 +1,116 @@
 package nl.hva;
 
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+public class RsaFrame {
 
-public class RsaFrame extends JFrame {
+  private static final int WIDTH = 100;
+  private static final int HEIGHT = 100;
 
-	private final int WIDTH = 800;
-	private final int HEIGHT = 500;
+  public RsaFrame() {
+    JFrame frameMain = new JFrame("RSA Calculator");
+    frameMain.setMinimumSize(new Dimension(WIDTH, HEIGHT));
 
-	private final JTextArea rSpace;
-	private final JTextArea iSpace;
-	private final JButton dstep1, dstep2;
-	private final JButton step2, step3;
-	private final JTextArea pKey;
+    Container containerMain = frameMain.getContentPane();
+    containerMain.setLayout(new BorderLayout());
 
-	private Rsa theCrypterr;
+    JPanel panelTop = new JPanel();
+    panelTop.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+    panelTop.add(new JLabel("RSA Calculator"));
 
-	public RsaFrame() {
-		super("encypte decrypte");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		setResizable(false);
+    containerMain.add(panelTop, BorderLayout.NORTH);
+    containerMain.add(leftPanel(), BorderLayout.WEST);
+    containerMain.add(rightPanel(), BorderLayout.EAST);
 
-		setLayout(new GridLayout(3, 1));
+    frameMain.pack();
+    frameMain.setVisible(true);
+  }
 
-		final String lengthInBits = JOptionPane.showInputDialog(this, "Step 1 provide n");
-		final Font resultFont = new Font("Arial", Font.PLAIN, 11);
+  private static JPanel rightPanel() {
+    JPanel panelRight = genericPanel();
 
-		if (lengthInBits == null) {
-			System.exit(0);
-		} else {
-			try {
-				theCrypterr = new Rsa(Integer.parseInt(lengthInBits));
+    panelRight.add(new JLabel("Decryption"));
 
-			} catch (final NumberFormatException e) {
-				JOptionPane.showMessageDialog(this, "provide a positive integer");
-			}
-		}
+    JPanel panelInputE = inputPanel("E = ");
+    panelRight.add(panelInputE);
+    panelRight.add(new JButton(new AbstractAction("Step 1") {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        // Perform Step 1
+      }
+    }));
+    panelRight.add(new JLabel("d is <value>"));
+    JPanel panelInputC = inputPanel("C = ");
+    panelRight.add(panelInputC);
+    panelRight.add(new JButton(new AbstractAction("Step 2") {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        // Perform Step 2
+      }
+    }));
+    panelRight.add(new JLabel("Message after decryption is: <m>"));
 
-		pKey = new JTextArea(8, 70);
-		pKey.setLineWrap(true);
-		pKey.setWrapStyleWord(true);
-		pKey.setEditable(false);
+    return panelRight;
+  }
 
-		rSpace = new JTextArea(8, 20);
-		rSpace.setLineWrap(true);
-		rSpace.setWrapStyleWord(true);
+  private static JPanel leftPanel() {
+    JPanel panelLeft = genericPanel();
 
-		iSpace = new JTextArea(8, 20);
-		iSpace.setLineWrap(true);
-		iSpace.setWrapStyleWord(true);
+    panelLeft.add(new JLabel("Encryption"));
+    JPanel panelInputN = inputPanel("N = ");
+    panelLeft.add(panelInputN);
+    panelLeft.add(new JButton(new AbstractAction("Step 1") {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        // Perform Step 1
+        System.out.println(getTextFromInputPanel(panelInputN)); // String user input
+      }
+    }));
+    panelLeft.add(new JLabel("p is <value>"));
+    panelLeft.add(new JLabel("q is <value>"));
+    panelLeft.add(new JLabel("time: "));
+    panelLeft.add(new JButton(new AbstractAction("Step 2") {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        // Perform Step 2
+      }
+    }));
+    panelLeft.add(new JLabel("e is <value>"));
+    JPanel panelInputM = inputPanel("M = ");
+    panelLeft.add(panelInputM);
+    panelLeft.add(new JButton(new AbstractAction("Step 3") {
+      @Override 
+      public void actionPerformed(ActionEvent e) {
+        // Perform Step 3
+      }
+    }));
+    panelLeft.add(new JLabel("Message after encryption is: <c>"));
 
-		rSpace.setFont(resultFont);
-		iSpace.setFont(resultFont);
+    return panelLeft;
+  }
 
-		rSpace.setMargin(new Insets(5, 5, 5, 5));
-		iSpace.setMargin(new Insets(5, 5, 5, 5));
+  private static JPanel genericPanel() {
+    JPanel panel = new JPanel();
+    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		dstep1 = new JButton("Decrypte step1");
-		dstep2 = new JButton("Decrypte step2");
-		step2 = new JButton("step2 Enqrypte");
-		step3 = new JButton("step3 Enqrypte");
+    return panel;
+  }
 
-		step2.addActionListener(new ButtonListener());
-		step3.addActionListener(new ButtonListener());
-		dstep1.addActionListener(new ButtonListener());
-		dstep2.addActionListener(new ButtonListener());
+  private static JPanel inputPanel(String labelText) {
+    JPanel panelInput = new JPanel();
+    panelInput.setLayout(new BoxLayout(panelInput, BoxLayout.X_AXIS));
+    panelInput.add(new JLabel(labelText));
+    panelInput.add(new JTextField());
 
-		final JPanel buttonPane = new JPanel();
-		buttonPane.add(step2);
-		buttonPane.add(step3);
-		buttonPane.add(dstep1);
-		buttonPane.add(dstep2);
-		buttonPane.add(pKey);
-		add(iSpace);
-		add(buttonPane);
-		add(rSpace);
-		theCrypterr.generatePandQ();
-		rSpace.setText(theCrypterr.getCalculateTime());
-		pack();
-	}
+    return panelInput;
+  }
 
-	private class ButtonListener implements ActionListener {
+  private static String getTextFromInputPanel(JPanel inputPanel) {
+    JTextField textField = (JTextField) inputPanel.getComponents()[1];
+    return textField.getText();
+  }
 
-		public void actionPerformed(final ActionEvent e) {
-			String result = "";
-			if (e.getSource() == step2) {
-				pKey.setText(theCrypterr.getPublicKey().toString() + "  is public key");
-			} else if (e.getSource() == step3) {
-				if (iSpace.getText() != null && iSpace.getText().isEmpty()) {
-					iSpace.setText("Please input a integer message");
-					return;
-				}
-				result = theCrypterr.encrypt(iSpace.getText().trim());
-			} else if (e.getSource() == dstep1) {
-				pKey.setText(theCrypterr.getPrivateKey());
-			} else if (e.getSource() == dstep2) {
-				result = theCrypterr.decrypt(iSpace.getText().trim());
-			}
-			rSpace.setText(result);
-		}
-	}
 }
