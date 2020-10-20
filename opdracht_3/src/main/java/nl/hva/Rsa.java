@@ -61,6 +61,7 @@ public class Rsa {
         calculateTime = "No solution exists";
     }
 
+
     // choose e < phi and co-prime to phi
     public void step2Part1() {
         phi = p.subtract(one).multiply(q.subtract(one));
@@ -68,7 +69,7 @@ public class Rsa {
             e = new BigInteger(phi.bitLength(), rand);
         } while (e.compareTo(one) <= 0 || e.compareTo(phi) >= 0 || !e.gcd(phi).equals(one));
         d = e.modInverse(phi);
-        System.out.println(d + "    =d---e=     " +e);
+        System.out.println(d + "    =d---e=     " + e);
     }
 
 
@@ -85,7 +86,7 @@ public class Rsa {
         e = new BigInteger(inputE);
         step1Part1(inputN);
         d = e.modInverse(phi);
-        System.out.println(d + "    =d---e=     " +e);
+        System.out.println(d + "    =d---e=     " + e);
     }
 
     public String step2Part2(String cipherText) {
