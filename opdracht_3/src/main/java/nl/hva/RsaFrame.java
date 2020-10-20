@@ -6,11 +6,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.security.interfaces.RSAKey;
 
 public class RsaFrame {
 
+    private static Rsa rsa;
+
     private static int width = 750;
-    private static int height = 475;
+    private static int height = 675;
     private static Border border = BorderFactory.createCompoundBorder(
             new EtchedBorder(),
             new EmptyBorder(10, 10, 10, 10)
@@ -46,18 +49,23 @@ public class RsaFrame {
         JPanel panelInputE = inputPanel("E = ");
         panelRight.add(panelInputE);
         panelRight.add(Box.createRigidArea(spacing));
-        panelRight.add(new JButton(new AbstractAction("Step 1") {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Perform Step 1
-            }
-        }));
         panelRight.add(Box.createRigidArea(spacing));
+
         panelRight.add(new JLabel("d is <value>"));
         panelRight.add(Box.createRigidArea(spacing));
         JPanel panelInputC = inputPanel("C = ");
         panelRight.add(panelInputC);
         panelRight.add(Box.createRigidArea(spacing));
+
+        panelRight.add(new JButton(new AbstractAction("Step 1") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String message = rsa.decrypt(getTextFromInputPanel(panelInputE));
+                setTextFromInputPanel(panelInputE, message );
+                // Perform Step 1
+            }
+        }));
+
         panelRight.add(new JButton(new AbstractAction("Step 2") {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,34 +81,45 @@ public class RsaFrame {
 
     private static JPanel leftPanel() {
         JPanel panelLeft = genericPanel();
-
         panelLeft.add(new JLabel("Encryption"));
         panelLeft.add(Box.createRigidArea(spacing));
         JPanel panelInputN = inputPanel("N = ");
+        JLabel q = new JLabel("p is  <value>");
+        JLabel p = new JLabel("q is  <value>");
+        JLabel time = new JLabel("time is ");
+        JLabel panelE = new JLabel("e is  <value>");
+        JLabel panelM = new JLabel("Message after encryption is: <c>");
         panelLeft.add(panelInputN);
         panelLeft.add(Box.createRigidArea(spacing));
+        panelLeft.add(Box.createRigidArea(spacing));
+        panelLeft.add(p);
+        panelLeft.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelLeft.add(q);
+        panelLeft.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelLeft.add(time);
+
         panelLeft.add(new JButton(new AbstractAction("Step 1") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Perform Step 1
                 System.out.println(getTextFromInputPanel(panelInputN)); // String user input
+                rsa = new Rsa(Integer.valueOf(getTextFromInputPanel(panelInputN)));
+                p.setText("p = " + rsa.getP());
+                q.setText("q = " + rsa.getQ());
+                time.setText("Tijd nodig = " + rsa.getCalculateTime());
             }
         }));
-        panelLeft.add(Box.createRigidArea(spacing));
-        panelLeft.add(new JLabel("p is <value>"));
-        panelLeft.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelLeft.add(new JLabel("q is <value>"));
-        panelLeft.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelLeft.add(new JLabel("time: "));
+
         panelLeft.add(Box.createRigidArea(new Dimension(0, 10)));
         panelLeft.add(new JButton(new AbstractAction("Step 2") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Perform Step 2
+                panelE.setText("e is  " + rsa.getE());
             }
         }));
         panelLeft.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelLeft.add(new JLabel("e is <value>"));
+        panelLeft.add(panelE);
         panelLeft.add(Box.createRigidArea(new Dimension(0, 10)));
         JPanel panelInputM = inputPanel("M = ");
         panelLeft.add(panelInputM);
@@ -109,10 +128,12 @@ public class RsaFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Perform Step 3
+                String message = getTextFromInputPanel(panelInputM);
+                panelM.setText("M encrypted = " + rsa.encrypt(message));
             }
         }));
         panelLeft.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelLeft.add(new JLabel("Message after encryption is: <c>"));
+        panelLeft.add(panelM);
         panelLeft.add(Box.createRigidArea(new Dimension(0, 10)));
 
         return panelLeft;
@@ -136,9 +157,14 @@ public class RsaFrame {
         return panelInput;
     }
 
+    private static void setTextFromInputPanel(JPanel inputPanel, String message) {
+        JTextField textField = (JTextField) inputPanel.getComponents()[1];
+        textField.setText(message);
+    }
+
     private static String getTextFromInputPanel(JPanel inputPanel) {
         JTextField textField = (JTextField) inputPanel.getComponents()[1];
         return textField.getText();
     }
-
 }
+
