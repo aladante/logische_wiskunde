@@ -6,11 +6,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.security.interfaces.RSAKey;
+import java.math.BigInteger;
 
 public class RsaFrame {
 
-    private static Rsa rsa;
+    private static Rsa rsa = new Rsa();
 
     private static int width = 750;
     private static int height = 675;
@@ -41,45 +41,6 @@ public class RsaFrame {
         frameMain.setVisible(true);
     }
 
-    private static JPanel rightPanel() {
-        JPanel panelRight = genericPanel();
-
-        panelRight.add(new JLabel("Decryption"));
-        panelRight.add(Box.createRigidArea(spacing));
-        JPanel panelInputE = inputPanel("E = ");
-        panelRight.add(panelInputE);
-        JPanel panelInputN = inputPanel("N = ");
-        panelRight.add(panelInputN);
-        panelRight.add(Box.createRigidArea(spacing));
-        panelRight.add(Box.createRigidArea(spacing));
-
-        panelRight.add(new JLabel("d is <value>"));
-        panelRight.add(Box.createRigidArea(spacing));
-        JPanel panelInputC = inputPanel("C = ");
-        panelRight.add(panelInputC);
-        panelRight.add(Box.createRigidArea(spacing));
-
-        panelRight.add(new JButton(new AbstractAction("Step 1") {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String message = rsa.decrypt(getTextFromInputPanel(panelInputE));
-                setTextFromInputPanel(panelInputE, message );
-                // Perform Step 1
-            }
-        }));
-
-        panelRight.add(new JButton(new AbstractAction("Step 2") {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Perform Step 2
-            }
-        }));
-        panelRight.add(Box.createRigidArea(spacing));
-        panelRight.add(new JLabel("Message after decryption is: <m>"));
-        panelRight.add(Box.createRigidArea(spacing));
-
-        return panelRight;
-    }
 
     private static JPanel leftPanel() {
         JPanel panelLeft = genericPanel();
@@ -104,8 +65,7 @@ public class RsaFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Perform Step 1
-                System.out.println(getTextFromInputPanel(panelInputN)); // String user input
-                rsa = new Rsa(Integer.valueOf(getTextFromInputPanel(panelInputN)));
+                rsa.step1Part1(getTextFromInputPanel(panelInputN));
                 p.setText("p = " + rsa.getP());
                 q.setText("q = " + rsa.getQ());
                 time.setText("Tijd nodig = " + rsa.getCalculateTime());
@@ -117,6 +77,8 @@ public class RsaFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Perform Step 2
+                rsa.step2Part1();
+                System.out.println(rsa.getE() + "   is e");
                 panelE.setText("e is  " + rsa.getE());
             }
         }));
@@ -131,7 +93,8 @@ public class RsaFrame {
             public void actionPerformed(ActionEvent e) {
                 // Perform Step 3
                 String message = getTextFromInputPanel(panelInputM);
-                panelM.setText("M encrypted = " + rsa.encrypt(message));
+                BigInteger encryptedMessage = rsa.step3part1(message);
+                panelM.setText("M encrypted = " + encryptedMessage);
             }
         }));
         panelLeft.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -140,6 +103,57 @@ public class RsaFrame {
 
         return panelLeft;
     }
+
+    private static JPanel rightPanel() {
+        JPanel panelRight = genericPanel();
+        JPanel panelInputE = inputPanel("E = ");
+        JPanel panelInputN = inputPanel("N = ");
+        JPanel panelInputC = inputPanel("C = ");
+        JLabel valueD = new JLabel("d is <value>");
+        JLabel valueM = new JLabel("Message after decryption is: <m>");
+
+        panelRight.add(new JLabel("Decryption"));
+        panelRight.add(Box.createRigidArea(spacing));
+
+        panelRight.add(panelInputE);
+        panelRight.add(panelInputN);
+        panelRight.add(Box.createRigidArea(spacing));
+        panelRight.add(Box.createRigidArea(spacing));
+
+        panelRight.add(valueD);
+        panelRight.add(Box.createRigidArea(spacing));
+        panelRight.add(panelInputC);
+        panelRight.add(Box.createRigidArea(spacing));
+        panelRight.add(Box.createRigidArea(spacing));
+        panelRight.add(valueM);
+        // this step takes input N and E to find D If
+        // if p and q are to big this will take a long time
+        panelRight.add(new JButton(new AbstractAction("Step 1") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String ee = getTextFromInputPanel(panelInputE);
+                String n = getTextFromInputPanel(panelInputN);
+                rsa.step1Part2(ee, n);
+                valueD.setText("d = " + rsa.getD());
+                // Perform Step 1
+            }
+        }));
+
+        panelRight.add(new JButton(new AbstractAction("Step 2") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String mess = getTextFromInputPanel(panelInputC);
+                String message = rsa.step2Part2(mess);
+                valueM.setText("M =" + message);
+                // Perform Step 2
+            }
+        }));
+
+        panelRight.add(Box.createRigidArea(spacing));
+
+        return panelRight;
+    }
+
 
     private static JPanel genericPanel() {
         JPanel panel = new JPanel();
@@ -152,20 +166,23 @@ public class RsaFrame {
 
     private static JPanel inputPanel(String labelText) {
         JPanel panelInput = new JPanel();
+        JTextArea textArea = new JTextArea();
+        textArea.setLineWrap(true);
+        panelInput.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelInput.setLayout(new BoxLayout(panelInput, BoxLayout.X_AXIS));
         panelInput.add(new JLabel(labelText));
-        panelInput.add(new JTextField());
+        panelInput.add(textArea);
 
         return panelInput;
     }
 
     private static void setTextFromInputPanel(JPanel inputPanel, String message) {
-        JTextField textField = (JTextField) inputPanel.getComponents()[1];
+        JTextArea textField = (JTextArea) inputPanel.getComponents()[1];
         textField.setText(message);
     }
 
     private static String getTextFromInputPanel(JPanel inputPanel) {
-        JTextField textField = (JTextField) inputPanel.getComponents()[1];
+        JTextArea textField = (JTextArea) inputPanel.getComponents()[1];
         return textField.getText();
     }
 }
