@@ -48,6 +48,8 @@ public class RsaFrame {
         panelRight.add(Box.createRigidArea(spacing));
         JPanel panelInputE = inputPanel("E = ");
         panelRight.add(panelInputE);
+        JPanel panelInputN = inputPanel("N = ");
+        panelRight.add(panelInputN);
         panelRight.add(Box.createRigidArea(spacing));
         panelRight.add(Box.createRigidArea(spacing));
 

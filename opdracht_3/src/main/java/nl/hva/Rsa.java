@@ -13,7 +13,7 @@ public class Rsa {
     private BigInteger publicKey;
     private BigInteger privateKey;
     private long calculateTime;
-    private BigInteger p, q, modules, e, d, phi;
+    private BigInteger p, q, n, e, d, phi;
 
     public Rsa(int bitLengt) {
 
@@ -27,7 +27,7 @@ public class Rsa {
             q = generateRandomPrim();
         }
         calculateTime = System.currentTimeMillis() - begin;
-        modules = p.multiply(q);
+        n = p.multiply(q);
         phi = p.subtract(one).multiply(q.subtract(one));
         GenerateKey();
     }
@@ -48,22 +48,33 @@ public class Rsa {
 
     public BigInteger encrypt(String message) {
         BigInteger acc = convertString(message);
-        return acc.modPow(publicKey, modules);
+        return acc.modPow(publicKey, n);
+    }
+
+
+    // choose e < phi and co-prime to phi
+    public void GenerateKey() {
+        do {
+            e = new BigInteger(phi.bitLength(), rand);
+        } while (e.compareTo(one) <= 0 || e.compareTo(phi) >= 0 || !e.gcd(phi).equals(one));
+        d = e.modInverse(phi);
+        publicKey = e;
+        privateKey = d;
     }
 
     public String decrypt(String encrypted) {
-        BigInteger mess = new BigInteger(encrypted).modPow(privateKey, modules);
+        BigInteger mess = new BigInteger(encrypted).modPow(privateKey, n);
         return recoverString(mess);
     }
 
-    public String decrypt(String encrypted, BigInteger pKey) {
-        BigInteger mess = new BigInteger(encrypted).modPow(pKey, modules);
-        ;
+    public String decrypt(String encrypted, BigInteger e) {
+        BigInteger mess = new BigInteger(encrypted).modPow(e, n);
         return recoverString(mess);
     }
 
-
-    public BigInteger getD() {
+    // with mod(n) en e (pub)
+    public BigInteger getD(BigInteger e_input, BigInteger n_input) {
+//        BigInteger d_calculated = e_input.pow(-1)
         return d;
     }
 
@@ -79,26 +90,22 @@ public class Rsa {
         return q;
     }
 
+    // pub key
     public BigInteger getE() {
         return e;
     }
 
-
-    // choose e < phi and co-prime to phi
-    public void GenerateKey() {
-        do {
-            e = new BigInteger(phi.bitLength(), rand);
-        } while (e.compareTo(BigInteger.valueOf(1)) <= 0 || e.compareTo(phi) >= 0 || !e.gcd(phi).equals(BigInteger.valueOf(1)));
-        d = e.modInverse(phi);
-        publicKey = e;
-        privateKey = d;
+    // N = p * q
+    public BigInteger getN() {
+        return n;
     }
+
 
 
     @Override
     public String toString() {
         return "Public:\t" + this.publicKey +
                 "Private:\t" + this.privateKey +
-                "Modulus:\t" + this.modules;
+                "Modulus:\t" + this.n;
     }
 }
