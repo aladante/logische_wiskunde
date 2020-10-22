@@ -65,7 +65,7 @@ public class RsaFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Perform Step 1
-                rsa.step1Part1(getTextFromInputPanel(panelInputN));
+                rsa.calculatePandQ(getTextFromInputPanel(panelInputN));
                 p.setText("p = " + rsa.getP());
                 q.setText("q = " + rsa.getQ());
                 time.setText("Tijd nodig = " + rsa.getCalculateTime());
@@ -77,7 +77,7 @@ public class RsaFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Perform Step 2
-                rsa.step2Part1();
+                rsa.generateE();
                 System.out.println(rsa.getE() + "   is e");
                 panelE.setText("e is  " + rsa.getE());
             }
@@ -93,7 +93,7 @@ public class RsaFrame {
             public void actionPerformed(ActionEvent e) {
                 // Perform Step 3
                 String message = getTextFromInputPanel(panelInputM);
-                BigInteger encryptedMessage = rsa.step3part1(message);
+                BigInteger encryptedMessage = rsa.encryptMessage(message);
                 panelM.setText("M encrypted = " + encryptedMessage);
             }
         }));
@@ -133,7 +133,7 @@ public class RsaFrame {
             public void actionPerformed(ActionEvent e) {
                 String ee = getTextFromInputPanel(panelInputE);
                 String n = getTextFromInputPanel(panelInputN);
-                rsa.step1Part2(ee, n);
+                rsa.decodingPart1(ee, n);
                 valueD.setText("d = " + rsa.getD());
                 // Perform Step 1
             }
@@ -143,7 +143,7 @@ public class RsaFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String mess = getTextFromInputPanel(panelInputC);
-                String message = rsa.step2Part2(mess);
+                String message = rsa.decodeCipher(mess);
                 valueM.setText("M =" + message);
                 // Perform Step 2
             }

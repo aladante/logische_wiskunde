@@ -34,7 +34,7 @@ public class Rsa {
     }
 
     // calculate P and Q
-    public void step1Part1(String nInput) {
+    public void calculatePandQ(String nInput) {
         this.n = new BigInteger(nInput);
 
         long begin = System.currentTimeMillis();
@@ -63,7 +63,7 @@ public class Rsa {
 
 
     // choose e < phi and co-prime to phi
-    public void step2Part1() {
+    public void generateE() {
         phi = p.subtract(one).multiply(q.subtract(one));
         do {
             e = new BigInteger(phi.bitLength(), rand);
@@ -73,37 +73,37 @@ public class Rsa {
     }
 
 
-    public BigInteger step3part1(String message) {
+    public BigInteger encryptMessage(String message) {
         BigInteger convert = convertString(message);
         BigInteger cipherText = convert.modPow(e, n);
-        System.out.println(convert + "             convertext");
-        System.out.println(cipherText + "         ciphertext");
+        System.out.println(cipherText);
         return cipherText;
     }
 
 
-    public void step1Part2(String inputE, String inputN) {
+    public void decodingPart1(String inputE, String inputN) {
         e = new BigInteger(inputE);
-        step1Part1(inputN);
+        calculatePandQ(inputN);
         d = e.modInverse(phi);
         System.out.println(d + "    =d---e=     " + e);
     }
 
-    public String step2Part2(String cipherText) {
+    public String decodeCipher(String cipherText) {
         BigInteger mess = new BigInteger(cipherText).modPow(d, n);
-        System.out.println(cipherText + "         ciphertext");
-        System.out.println(mess + "         convertext");
+        System.out.println(mess + "----- needs to be bytes");
         return recoverString(mess);
     }
 
     public BigInteger convertString(String message) {
         BigInteger bytes = new BigInteger(message.getBytes());
-        System.out.println(new String(bytes.toByteArray()));
+        System.out.println(bytes + "------is bytes");
+        System.out.println(new String(bytes.toByteArray()) + "------- String");
         return bytes;
     }
 
     public String recoverString(BigInteger bytes) {
-        return new String(bytes.toByteArray());
+        String message = new String (bytes.toByteArray());
+        return message;
     }
 
 
