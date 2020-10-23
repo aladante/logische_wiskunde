@@ -93,7 +93,8 @@ public class RsaFrame {
             public void actionPerformed(ActionEvent e) {
                 // Perform Step 3
                 String message = getTextFromInputPanel(panelInputM);
-                BigInteger encryptedMessage = rsa.encryptMessage(message);
+                String encryptedMessage = rsa.encryptMessage(message);
+                System.out.println(encryptedMessage);
                 panelM.setText("M encrypted = " + encryptedMessage);
             }
         }));

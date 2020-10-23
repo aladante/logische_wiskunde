@@ -1,6 +1,7 @@
 package nl.hva;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -73,10 +74,14 @@ public class Rsa {
     }
 
 
-    public BigInteger encryptMessage(String message) {
-        BigInteger convert = convertString(message);
-        BigInteger cipherText = convert.modPow(e, n);
-        System.out.println(cipherText);
+    public String encryptMessage(String message) {
+        String cipherText = "";
+        ArrayList<Integer> convert = convertString(message);
+
+        for(Integer i : convert){
+            cipherText =cipherText + BigInteger.valueOf(i).modPow(e, n) + ",";
+        }
+        System.out.println(d + "    =d---e=     " + e + "----- n = " + n);
         return cipherText;
     }
 
@@ -89,22 +94,28 @@ public class Rsa {
     }
 
     public String decodeCipher(String cipherText) {
-        BigInteger mess = new BigInteger(cipherText).modPow(d, n);
-        System.out.println(mess + "----- needs to be bytes");
-        return recoverString(mess);
+        String[] cipherArray = cipherText.split(",");
+        ArrayList<Character> mess = new ArrayList<>();
+        for(String c : cipherArray){
+            BigInteger letter = new BigInteger(c).modPow(d, n);
+            mess.add((char)letter.intValue());
+        }
+        return  mess.stream().map(e->e.toString()).reduce((acc, e) -> acc  + e).get();
     }
 
-    public BigInteger convertString(String message) {
-        BigInteger bytes = new BigInteger(message.getBytes());
-        System.out.println(bytes + "------is bytes");
-        System.out.println(new String(bytes.toByteArray()) + "------- String");
-        return bytes;
+    public ArrayList convertString(String message) {
+        ArrayList cipher = new ArrayList();
+        char[] messArray = message.toCharArray();
+        for (char c : messArray){
+            cipher.add(Integer.valueOf(c));
+        }
+        return cipher;
     }
-
-    public String recoverString(BigInteger bytes) {
-        String message = new String (bytes.toByteArray());
-        return message;
-    }
+//
+//    public String recoverString( bytes) {
+//        String message = new String (bytes.toByteArray());
+//        return message;
+//    }
 
 
     // private key
