@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="36ce328b-40ae-41b5-9abd-728100983ae6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/hva/Rsa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/hva/Rsa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/hva/RsaFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/hva/RsaFrame.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1j5a0bh3gQE7OqTOlRIjcmwyLmO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="nl.hva.Main" />
+      <module name="rsa" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="nl.hva.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="36ce328b-40ae-41b5-9abd-728100983ae6" name="Default Changelist" comment="" />
+      <created>1603096185764</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603096185764</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1319" height="256" key="GridCell.Tab.0.bottom" timestamp="1603635908894">
+      <screen x="0" y="23" width="1680" height="979" />
+    </state>
+    <state width="1319" height="256" key="GridCell.Tab.0.bottom/0.23.1680.979@0.0.1680.1050" timestamp="1603635666433" />
+    <state width="1319" height="256" key="GridCell.Tab.0.bottom/0.23.1680.979@0.23.1680.979" timestamp="1603635908894" />
+    <state width="1319" height="256" key="GridCell.Tab.0.center" timestamp="1603635908894">
+      <screen x="0" y="23" width="1680" height="979" />
+    </state>
+    <state width="1319" height="256" key="GridCell.Tab.0.center/0.23.1680.979@0.0.1680.1050" timestamp="1603635666433" />
+    <state width="1319" height="256" key="GridCell.Tab.0.center/0.23.1680.979@0.23.1680.979" timestamp="1603635908894" />
+    <state width="1319" height="256" key="GridCell.Tab.0.left" timestamp="1603635908893">
+      <screen x="0" y="23" width="1680" height="979" />
+    </state>
+    <state width="876" height="183" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1603541126962" />
+    <state width="1319" height="256" key="GridCell.Tab.0.left/0.23.1680.979@0.0.1680.1050" timestamp="1603635666432" />
+    <state width="1319" height="256" key="GridCell.Tab.0.left/0.23.1680.979@0.23.1680.979" timestamp="1603635908893" />
+    <state width="1319" height="256" key="GridCell.Tab.0.right" timestamp="1603635908894">
+      <screen x="0" y="23" width="1680" height="979" />
+    </state>
+    <state width="1319" height="256" key="GridCell.Tab.0.right/0.23.1680.979@0.0.1680.1050" timestamp="1603635666433" />
+    <state width="1319" height="256" key="GridCell.Tab.0.right/0.23.1680.979@0.23.1680.979" timestamp="1603635908894" />
+    <state width="1319" height="256" key="GridCell.Tab.1.bottom" timestamp="1603635773342">
+      <screen x="0" y="23" width="1680" height="979" />
+    </state>
+    <state width="1319" height="256" key="GridCell.Tab.1.bottom/0.23.1680.979@0.0.1680.1050" timestamp="1603635666435" />
+    <state width="1319" height="256" key="GridCell.Tab.1.bottom/0.23.1680.979@0.23.1680.979" timestamp="1603635773342" />
+    <state width="1319" height="256" key="GridCell.Tab.1.center" timestamp="1603635773341">
+      <screen x="0" y="23" width="1680" height="979" />
+    </state>
+    <state width="1319" height="256" key="GridCell.Tab.1.center/0.23.1680.979@0.0.1680.1050" timestamp="1603635666434" />
+    <state width="1319" height="256" key="GridCell.Tab.1.center/0.23.1680.979@0.23.1680.979" timestamp="1603635773341" />
+    <state width="1319" height="256" key="GridCell.Tab.1.left" timestamp="1603635773340">
+      <screen x="0" y="23" width="1680" height="979" />
+    </state>
+    <state width="1319" height="256" key="GridCell.Tab.1.left/0.23.1680.979@0.0.1680.1050" timestamp="1603635666434" />
+    <state width="1319" height="256" key="GridCell.Tab.1.left/0.23.1680.979@0.23.1680.979" timestamp="1603635773340" />
+    <state width="1319" height="256" key="GridCell.Tab.1.right" timestamp="1603635773341">
+      <screen x="0" y="23" width="1680" height="979" />
+    </state>
+    <state width="1319" height="256" key="GridCell.Tab.1.right/0.23.1680.979@0.0.1680.1050" timestamp="1603635666434" />
+    <state width="1319" height="256" key="GridCell.Tab.1.right/0.23.1680.979@0.23.1680.979" timestamp="1603635773341" />
+    <state x="548" y="236" key="run.anything.popup" timestamp="1603356024681">
+      <screen x="0" y="23" width="1680" height="979" />
+    </state>
+    <state x="548" y="236" key="run.anything.popup/0.23.1680.979@0.23.1680.979" timestamp="1603356024681" />
+  </component>
+</project>

@@ -89,6 +89,7 @@ public class Rsa {
     public void decodingPart1(String inputE, String inputN) {
         e = new BigInteger(inputE);
         calculatePandQ(inputN);
+        phi = p.subtract(one).multiply(q.subtract(one));
         d = e.modInverse(phi);
         System.out.println(d + "    =d---e=     " + e);
     }

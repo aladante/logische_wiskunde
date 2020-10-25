@@ -146,6 +146,7 @@ public class RsaFrame {
             public void actionPerformed(ActionEvent e) {
                 String mess = getTextFromInputPanel(panelInputC);
                 String message = rsa.decodeCipher(mess);
+                System.out.println(message);
                 valueM.setText("M =" + message);
                 // Perform Step 2
             }
@@ -191,9 +192,6 @@ public class RsaFrame {
     private static JPanel inputPanel(String labelText) {
         JPanel panelInput = new JPanel();
         JTextField textField = new JTextField();
-        // JTextArea textArea = new JTextArea(1, 1);
-        // textField.setLineWrap(true);
-        // textArea.getStyle().setAlignment(RsaFrame.Center);
         panelInput.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelInput.setLayout(new BoxLayout(panelInput, BoxLayout.X_AXIS));
         panelInput.add(new JLabel(labelText));
