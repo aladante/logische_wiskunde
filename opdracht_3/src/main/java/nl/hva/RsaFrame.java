@@ -13,7 +13,7 @@ public class RsaFrame {
     private static Rsa rsa = new Rsa();
 
     private static int width = 750;
-    private static int height = 575;
+    private static int height = 675;
     private static Border border = BorderFactory.createCompoundBorder(
             new EtchedBorder(),
             new EmptyBorder(10, 10, 10, 10)
@@ -98,12 +98,10 @@ public class RsaFrame {
                 String encryptedMessage = rsa.encryptMessage(message);
                 System.out.println(encryptedMessage);
                 labelM.setText("M encrypted = " + encryptedMessage);
-                // labelM.setText("<html><p style=\"width:250px\">"+encryptedMessage+"</p></html>");
             }
         }));
 
         addWithSpacingBelow(panelLeft, addMultilineLabelToScrollPane(labelM));
-        panelLeft.add(Box.createRigidArea(new Dimension(0, 185)));
 
         return panelLeft;
     }
@@ -152,8 +150,6 @@ public class RsaFrame {
             }
         }));
 
-        panelRight.add(Box.createRigidArea(new Dimension(0, 275)));
-
         return panelRight;
     }
 
@@ -170,7 +166,7 @@ public class RsaFrame {
 
     private static JScrollPane addMultilineLabelToScrollPane(JTextArea multilineLabel) {
         JScrollPane scrollPane = new JScrollPane(multilineLabel);
-        // scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+        scrollPane.setPreferredSize(new Dimension(width / 2, 150));
         scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
         return scrollPane;
     }
