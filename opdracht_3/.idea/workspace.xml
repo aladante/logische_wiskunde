@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36ce328b-40ae-41b5-9abd-728100983ae6" name="Default Changelist" comment="">
+    <list default="true" id="a3364d29-bbdf-4f20-b0dd-2c336296cade" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manual/Chapters/manual.tex" beforeDir="false" afterPath="$PROJECT_DIR$/manual/Chapters/manual.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/nl/hva/Rsa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/hva/Rsa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nl/hva/RsaFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/hva/RsaFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,25 +65,29 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1319" height="256" key="GridCell.Tab.0.bottom" timestamp="1603635908894">
-      <screen x="0" y="23" width="1680" height="979" />
+    <state width="914" height="280" key="GridCell.Tab.0.bottom" timestamp="1603711846638">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state width="914" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1603711846638" />
     <state width="1319" height="256" key="GridCell.Tab.0.bottom/0.23.1680.979@0.0.1680.1050" timestamp="1603635666433" />
     <state width="1319" height="256" key="GridCell.Tab.0.bottom/0.23.1680.979@0.23.1680.979" timestamp="1603635908894" />
-    <state width="1319" height="256" key="GridCell.Tab.0.center" timestamp="1603635908894">
-      <screen x="0" y="23" width="1680" height="979" />
+    <state width="914" height="280" key="GridCell.Tab.0.center" timestamp="1603711846638">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state width="914" height="280" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1603711846638" />
     <state width="1319" height="256" key="GridCell.Tab.0.center/0.23.1680.979@0.0.1680.1050" timestamp="1603635666433" />
     <state width="1319" height="256" key="GridCell.Tab.0.center/0.23.1680.979@0.23.1680.979" timestamp="1603635908894" />
-    <state width="1319" height="256" key="GridCell.Tab.0.left" timestamp="1603635908893">
-      <screen x="0" y="23" width="1680" height="979" />
+    <state width="914" height="280" key="GridCell.Tab.0.left" timestamp="1603711846638">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="876" height="183" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1603541126962" />
+    <state width="914" height="280" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1603711846638" />
     <state width="1319" height="256" key="GridCell.Tab.0.left/0.23.1680.979@0.0.1680.1050" timestamp="1603635666432" />
     <state width="1319" height="256" key="GridCell.Tab.0.left/0.23.1680.979@0.23.1680.979" timestamp="1603635908893" />
-    <state width="1319" height="256" key="GridCell.Tab.0.right" timestamp="1603635908894">
-      <screen x="0" y="23" width="1680" height="979" />
+    <state width="914" height="280" key="GridCell.Tab.0.right" timestamp="1603711846638">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state width="914" height="280" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1603711846638" />
     <state width="1319" height="256" key="GridCell.Tab.0.right/0.23.1680.979@0.0.1680.1050" timestamp="1603635666433" />
     <state width="1319" height="256" key="GridCell.Tab.0.right/0.23.1680.979@0.23.1680.979" timestamp="1603635908894" />
     <state width="1319" height="256" key="GridCell.Tab.1.bottom" timestamp="1603635773342">

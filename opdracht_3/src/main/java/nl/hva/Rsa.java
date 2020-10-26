@@ -6,10 +6,8 @@ import java.util.Random;
 
 
 public class Rsa {
-    Random rand = new Random();
-
+    private Random rand = new Random();
     public static final BigInteger INIT_NUMBER = new BigInteger("2");
-
     private final static BigInteger one = new BigInteger("1");
     private String calculateTime;
     private BigInteger p, q, n, e, d, phi;
@@ -37,7 +35,6 @@ public class Rsa {
     // calculate P and Q
     public void calculatePandQ(String nInput) {
         this.n = new BigInteger(nInput);
-
         long begin = System.currentTimeMillis();
         //Initialise n and p
         BigInteger p = INIT_NUMBER;
@@ -48,12 +45,10 @@ public class Rsa {
                 //Calculate q
                 BigInteger q = n.divide(p);
                 //Displays the result
-
                 this.p = p;
                 this.q = q;
                 calculateTime = String.valueOf(System.currentTimeMillis() - begin);
                 //The end of the algorithm
-
                 return;
             }
             //p = the next prime number
@@ -77,7 +72,6 @@ public class Rsa {
     public String encryptMessage(String message) {
         String cipherText = "";
         ArrayList<Integer> convert = convertString(message);
-
         for(Integer i : convert){
             cipherText =cipherText + BigInteger.valueOf(i).modPow(e, n) + ",";
         }
