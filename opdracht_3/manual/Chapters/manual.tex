@@ -11,7 +11,7 @@ This is also applicable to decryption because P and Q aren't know if E and N is 
 \subsection{Run}
 The application can be run by clicking the application.
 
-\subsection{RSA}
+\section{RSA}
 The program differs from an original RSA structure. This is thanks the the input N that will generate the P and Q.
 
 The rsa object has multiple variables that will be shown below.
@@ -59,7 +59,7 @@ public void calculatePandQ(String nInput) {
 
 With those steps P and q are generated.
 
-\section{Generate E}
+\subsubsection{Generate E}
 To generate E we first calculate phi, then we loop and generate an E till E  < phi and co-prime to phi.
 
 The code looks as following
@@ -71,10 +71,10 @@ do {
 d = e.modInverse(phi);
 \end{lstlisting}{}
 
-\section{encryption}
+\subsection{encryption}
 To encrypt the message we first split the string in a char array.
 Every char will be cast to an integer value and that value will be encrypted.
-The cipherText will splitt each char with a ,.
+The cipherText will split each char with an ",".
 
 \begin{lstlisting}
 String cipherText = "";
@@ -82,12 +82,11 @@ ArrayList<Integer> convert = convertString(message);
 for(Integer i : convert){
     cipherText =cipherText + BigInteger.valueOf(i).modPow(e, n) + ",";
 }
-System.out.println(d + "    =d---e=     " + e + "----- n = " + n);
 return cipherText;
 \end{lstlisting}{}
 
 
-\section{Decryption}
+\subsection{Decryption}
 To Decode we will handle input e and N and calculate P and q based on input.
 Then D will be calculated with the provided input and the calculated P and Q.
 
@@ -97,7 +96,7 @@ calculatePandQ(inputN);
 d = e.modInverse(phi);
 \end{lstlisting}{}
 
-\subsection{Step 2}
+\subsubsection{Step 2}
 In the first step we will generate a private key, in the final step we will use this private key to decode the cipher.
 
 Finally every char will BigInteger will be cast to a int that will translate to the message.
@@ -115,10 +114,23 @@ public String decodeCipher(String cipherText) {
     return  mess.stream().map(e->e.toString()).reduce((acc, e) -> acc  + e).get();
 }
 \end{lstlisting}
+\newpage
 
 \section{Examples}
-\begin{figure}
+\begin{figure}[h]
     \includegraphics[width=\linewidth]{images/example_1}
     \caption{example 1}
     \label{fig:boat1}
+\end{figure}
+
+\begin{figure}[h]
+    \includegraphics[width=\linewidth]{images/example_2}
+    \caption{example 2}
+    \label{fig:example 2}
+\end{figure}
+
+\begin{figure}[h]
+    \includegraphics[width=\linewidth]{images/example_3}
+    \caption{example 3}
+    \label{fig:example 3}
 \end{figure}
