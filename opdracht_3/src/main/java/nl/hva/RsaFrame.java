@@ -7,6 +7,8 @@ import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.math.BigInteger;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class RsaFrame {
 
@@ -48,16 +50,50 @@ public class RsaFrame {
         addWithSpacingBelow(panelLeft, new JLabel("Encryption"));
 
         JPanel panelInputN = inputPanel("N = ");
-        panelLeft.add(panelInputN);
+
+        JPanel p = inputPanel("p = ");
+
+        JPanel q = inputPanel("q = ");
+
+        DocumentListener dl = new DocumentListener() {
+          @Override
+          public void insertUpdate(DocumentEvent e) {
+              updateFieldState();
+          }
+
+          @Override
+          public void removeUpdate(DocumentEvent e) {
+              updateFieldState();
+          }
+
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+              updateFieldState();
+          }
+
+          protected void updateFieldState() {
+              String text = "";
+              try {
+                 long pNum = Long.parseLong(getTextFromInputPanel(p));
+                 long qNum = Long.parseLong(getTextFromInputPanel(q));
+                 text = String.valueOf((pNum * qNum));
+              }
+              catch (NumberFormatException e) { }
+              setTextFromInputPanel(panelInputN, text);
+          }
+        };
+
+        JTextField pTextField = (JTextField) p.getComponents()[1];
+        JTextField qTextField = (JTextField) q.getComponents()[1];
+        pTextField.getDocument().addDocumentListener(dl);
+        qTextField.getDocument().addDocumentListener(dl);
+
         addWithSpacingBelow(panelLeft, panelInputN);
+        addWithSpacingBelow(panelLeft, p);
+        addWithSpacingBelow(panelLeft, q);
 
-        JTextArea p = multilineLabel("p = <value>");
-        addWithSpacingBelow(panelLeft, addMultilineLabelToScrollPane(p));
 
-        JTextArea q = multilineLabel("q = <value>");
-        addWithSpacingBelow(panelLeft, addMultilineLabelToScrollPane(q));
-
-        JTextArea time = multilineLabel("time = <value>");
+        JTextArea time = multilineLabel("time taken finding p and q = <value>");
         addWithSpacingBelow(panelLeft, addMultilineLabelToScrollPane(time));
 
         addWithSpacingBelow(panelLeft, new JButton(new AbstractAction("Step 1") {
@@ -65,9 +101,9 @@ public class RsaFrame {
             public void actionPerformed(ActionEvent e) {
                 // Perform Step 1
                 rsa.calculatePandQ(getTextFromInputPanel(panelInputN));
-                p.setText("p = " + rsa.getP());
-                q.setText("q = " + rsa.getQ());
-                time.setText("time = " + rsa.getCalculateTime());
+                setTextFromInputPanel(p, String.valueOf(rsa.getP()));
+                setTextFromInputPanel(q, String.valueOf(rsa.getQ()));
+                time.setText("time taken finding p and q = " + rsa.getCalculateTime() + " milliseconds");
             }
         }));
 
@@ -145,7 +181,7 @@ public class RsaFrame {
                 String mess = getTextFromInputPanel(panelInputC);
                 String message = rsa.decodeCipher(mess);
                 System.out.println(message);
-                valueM.setText("M =" + message);
+                valueM.setText("M = " + message);
                 // Perform Step 2
             }
         }));
