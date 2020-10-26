@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3364d29-bbdf-4f20-b0dd-2c336296cade" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/manual/Chapters/manual.tex" beforeDir="false" afterPath="$PROJECT_DIR$/manual/Chapters/manual.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manual/Document.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/manual/Document.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manual/titlepage.tex" beforeDir="false" afterPath="$PROJECT_DIR$/manual/titlepage.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
