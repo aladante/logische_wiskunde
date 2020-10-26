@@ -35,7 +35,7 @@ public class Rsa {
     // calculate P and Q
     public void calculatePandQ(String nInput) {
         this.n = new BigInteger(nInput);
-        long begin = System.currentTimeMillis();
+        long begin = System.nanoTime();
         //Initialise n and p
         BigInteger p = INIT_NUMBER;
         //For each prime p
@@ -47,7 +47,8 @@ public class Rsa {
                 //Displays the result
                 this.p = p;
                 this.q = q;
-                calculateTime = String.valueOf(System.currentTimeMillis() - begin);
+                
+                calculateTime = String.valueOf((System.nanoTime() - begin) / 1000000.0);
                 //The end of the algorithm
                 return;
             }
