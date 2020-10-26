@@ -1,22 +1,27 @@
 \section{Introduction} \label{man-introduction}
-This section will go in detail about the working of the system.
-We created an application that is able to generate a RSA encryption.
+This section will go into detail about the working of the system.
+We created an application that is able to do RSA encryption and decryption
+of text messages.
 
 \section{Application} \label{man-application}
 This section will provide information about the setup of the program.
-Make sure there are no spaces in the input. This will trip the application.
+The user of the application needs to make sure there are no extra spaces
+in their input in order to get correct results.
 
-Be also aware that the calculation of P and  Q could take a time based on the N.
-This is also applicable to decryption because P and Q aren't know if E and N is provided. This is way it takes a time to decrypt. 
+The user also needs to be aware that the calculation of P and Q could
+take some time based on the value of N.
+This also applies to decryption because P and Q aren't know beforehand
+when E and N are provided. For this reason decryption can take some time also.
+
 \subsection{Run}
-The application can be run by clicking the application.
+The application can be run by double clicking it.
 
 \section{RSA}
-The program differs from an original RSA structure. This is thanks the the input N that will generate the P and Q.
+The RSA class in our application has multiple variables relevant to the
+RSA encryption and decryption process which will be looked at below.
 
-The rsa object has multiple variables that will be shown below.
-
-The note worthy variables are INIT\_NUMBER, this will init the first prime that will be used to calculate P and Q.
+Some note worthy variables are INIT\_NUMBER, this will initialize
+the first prime that will be used to calculate P and Q.
 
 \begin{lstlisting}{}
 private Random rand = new Random();
@@ -26,10 +31,11 @@ private String calculateTime;
 private BigInteger p, q, n, e, d, phi;
 \end{lstlisting}
 
-We choose to use Big Interger for the provided methods that come with the Math package.
+We've chosen to use Big Interger for the provided methods which comes with the Math package.
 Such methods are modPow, probablePrime and isProbablePrime.
 
-To generate P and Q we use te method calculatePAndQ based on the input N.
+To generate P and Q we use the method calculatePAndQ based on the input N.
+This method is listed below.
 
 \begin{lstlisting}
 public void calculatePandQ(String nInput) {
@@ -57,13 +63,14 @@ public void calculatePandQ(String nInput) {
 }
 \end{lstlisting}
 
-With those steps P and q are generated.
+Using those steps P and Q are generated.
 
 \subsubsection{Generate E}
-To generate E we first calculate phi, then we loop and generate an E till E  < phi and co-prime to phi.
+To generate E we first calculate phi, then we loop and generate an E untill E is
+less than phi and co-prime to phi.
 
-The code looks as following
-\begin{lstlisting}  
+The code for these calculations is as follows:
+\begin{lstlisting}
 phi = p.subtract(one).multiply(q.subtract(one));
 do {
     e = new BigInteger(phi.bitLength(), rand);
@@ -74,7 +81,7 @@ d = e.modInverse(phi);
 \subsection{encryption}
 To encrypt the message we first split the string in a char array.
 Every char will be cast to an integer value and that value will be encrypted.
-The cipherText will split each char with an ",".
+The cipherText will split each char by a comma.
 
 \begin{lstlisting}
 String cipherText = "";
@@ -85,9 +92,9 @@ for(Integer i : convert){
 return cipherText;
 \end{lstlisting}{}
 
-
 \subsection{Decryption}
-To Decode we will handle input e and N and calculate P and q based on input.
+Decryption requires an e and N and the encrypted text c as input.
+P and Q are calculated based on the N the user has entered.
 Then D will be calculated with the provided input and the calculated P and Q.
 
 \begin{lstlisting}
@@ -99,7 +106,8 @@ d = e.modInverse(phi);
 \subsubsection{Step 2}
 In the first step we will generate a private key, in the final step we will use this private key to decode the cipher.
 
-Finally every char will BigInteger will be cast to a int that will translate to the message.
+Finally every char will BigInteger will be cast to a int which will translate to
+the original message.
 
 By making use of the stream method we can convert the whole array to the original message.
 
@@ -117,6 +125,10 @@ public String decodeCipher(String cipherText) {
 \newpage
 
 \section{Examples}
+Below are listed some pictures that show how our
+application implements the encryption and decryption
+process. An N and a message are entered and output
+is generated.
 \begin{figure}[h]
     \includegraphics[width=\linewidth]{images/example_1}
     \caption{example 1}
